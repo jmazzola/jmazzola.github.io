@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+_site/
+
+# Obsidian's per-machine layout state (src/posts is the vault)
+src/posts/.obsidian/workspace*.json
+
+# local harness stuff
+.omp/
+
+# Windows Explorer thumbnail cache
+Thumbs.db
+
+# Logs
+*.log

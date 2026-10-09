@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Theme: My IDA Theme
+   Colors taken from my IDA Pro theme.
+   Active when <html data-theme="ida">; set "theme" in src/_data/site.json.
+   Delete this file and its site.json entry to remove the theme entirely.
+   ========================================================================== */
+
+:root[data-theme="ida"] {
+  /* surfaces */
+  --bg: #1c1d25;          /* graph-bg-bottom */
+  --bg-raise: #21232d;
+  --surface: #282a36;     /* line-bg-default (disassembly background) */
+  --surface-2: #323544;   /* QScrollBar */
+  --code-bg: #282a36;     /* code blocks sit on the disassembly background */
+
+  /* hairlines: comment blue */
+  --line: rgba(98, 114, 164, 0.16);
+  --line-strong: rgba(98, 114, 164, 0.3);
+
+  /* ink */
+  --ink: #f8f8f2;         /* QWidget color */
+  --ink-soft: #bdbfbf;    /* line-fg-default */
+  --ink-mute: #8398d4;    /* line-fg-automatic-comment */
+  --ink-faint: #6272a4;   /* line-fg-regular-comment */
+
+  /* accent: the purple identifier highlight */
+  --accent: #bd93f9;      /* line-bg-highlight */
+  --accent-strong: #d4b8ff;
+  --accent-ink: #1c1d25;
+  --accent-rgb: 189, 147, 249;
+  --glow-rgb: 139, 233, 253;  /* register-name */
+
+  /* component surfaces */
+  --header-bg: rgba(28, 29, 37, 0.8);
+  --dump-bg: linear-gradient(180deg, rgba(40, 42, 54, 0.94), rgba(33, 35, 45, 0.96));
+  --dump-hex: #bdbfbf;
+  --code-ink: #bdbfbf;
+
+  /* category marks */
+  --cat-vibe-coded: #ffb86c;  /* strlit-in-data */
+  --cat-re-with-ai: #8be9fd;  /* register-name / libfunc */
+  --cat-sans-ai: #50fa7b;     /* strlit-in-insn */
+  --cat-thoughts: #ffaaff;    /* alt-opnd */
+}
+
+/* hex dump: highlighted row reads like an IDA hex view string hit */
+:root[data-theme="ida"] .dump-row.is-hot .dump-asc { color: #ffb86c; }
+
+/* syntax tokens, mapped to IDA line-fg roles */
+:root[data-theme="ida"] .token.comment,
+:root[data-theme="ida"] .token.prolog,
+:root[data-theme="ida"] .token.doctype,
+:root[data-theme="ida"] .token.cdata { color: #6272a4; }                 /* regular-comment */
+:root[data-theme="ida"] .token.punctuation,
+:root[data-theme="ida"] .token.operator,
+:root[data-theme="ida"] .token.entity,
+:root[data-theme="ida"] .token.url { color: #bdbfbf; }                   /* default */
+:root[data-theme="ida"] .token.keyword,
+:root[data-theme="ida"] .token.important,
+:root[data-theme="ida"] .token.atrule,
+:root[data-theme="ida"] .token.rule { color: #f8f8f2; font-weight: 600; } /* keyword */
+:root[data-theme="ida"] .token.function,
+:root[data-theme="ida"] .token.function-variable { color: #f1c900; }     /* code-name */
+:root[data-theme="ida"] .token.class-name,
+:root[data-theme="ida"] .token.builtin,
+:root[data-theme="ida"] .token.type,
+:root[data-theme="ida"] .token.namespace { color: #ebebb9; }             /* regular-data-name */
+:root[data-theme="ida"] .token.string,
+:root[data-theme="ida"] .token.char,
+:root[data-theme="ida"] .token.attr-value,
+:root[data-theme="ida"] .token.regex,
+:root[data-theme="ida"] .token.template-string { color: #50fa7b; }       /* strlit-in-insn */
+:root[data-theme="ida"] .token.number,
+:root[data-theme="ida"] .token.boolean,
+:root[data-theme="ida"] .token.constant,
+:root[data-theme="ida"] .token.symbol { color: #e25535; }                /* numlit-in-data */
+:root[data-theme="ida"] .token.property,
+:root[data-theme="ida"] .token.attr-name,
+:root[data-theme="ida"] .token.tag,
+:root[data-theme="ida"] .token.selector,
+:root[data-theme="ida"] .token.register { color: #8be9fd; }              /* register-name */
+:root[data-theme="ida"] .token.macro,
+:root[data-theme="ida"] .token.directive { color: #ff5afd; }             /* import-name */
+:root[data-theme="ida"] .token.variable,
+:root[data-theme="ida"] .token.parameter { color: #ff8000; }             /* locvar */
+:root[data-theme="ida"] .token.deleted { color: #ff5555; }               /* error */
+:root[data-theme="ida"] .token.inserted { color: #50fa7b; }

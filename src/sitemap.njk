@@ -1,0 +1,16 @@
+---
+permalink: /sitemap.xml
+layout: false
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {%- for entry in collections.all %}
+  {%- if entry.url and not entry.data.sitemapIgnore and not ("404" in entry.url) %}
+  <url>
+    <loc>{{ site.url }}{{ entry.url | escape }}</loc>
+    <lastmod>{{ entry.date | isoDate }}</lastmod>
+  </url>
+  {%- endif %}
+  {%- endfor %}
+</urlset>

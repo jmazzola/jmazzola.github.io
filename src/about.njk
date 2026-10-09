@@ -1,0 +1,192 @@
+---
+layout: base.njk
+title: About
+description: "How I went from Xbox 360 modded lobbies and kernel cheats to anti-cheat at ESL, Badlion and Rockstar Games. Ex-cheat dev turned senior security engineer."
+permalink: /about/
+---
+{%- import "icons.njk" as icons -%}
+<header class="page-head">
+  <div class="shell">
+    <p class="kicker"><span class="mark" aria-hidden="true"></span>About</p>
+    <h1 class="page-title">I used to write cheats. Now I get paid to stop them.</h1>
+    <p class="page-lead">I'm Justin Mazzola, a software and reverse engineer born and raised in New York. I've been taking software apart for 15+ years now - the first chunk of that writing cheats, and everything since trying to stop them.</p>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="about-layout">
+    <div class="about-main">
+
+      <section class="chapter" aria-labelledby="ch-origins">
+        <div class="chapter-head">
+          <p class="section-label"><span class="mark" aria-hidden="true"></span>Origins</p>
+          <h2 class="chapter-title" id="ch-origins">Trainers and transfer cables</h2>
+        </div>
+        <div class="prose">
+          <p>It started before the Xbox 360, with trainers I wrote in C# for Flash games. Find the address, freeze the value, change it, and watch the game just believe you. I've basically been asking "how does this actually work, and what happens if I lie to it?" ever since.</p>
+          <p>Then the Xbox 360 came along and things got serious. I modded Halo maps and got them onto the console by talking my way into a hard drive transfer cable. I was one of the first people running modded lobbies in Modern Warfare 2, on a JTAG'd console with patched FF files and a patched XEX so the game would actually run them. I also found UFO mode working online in Call of Duty 4 by messing around with the save game format until it let me use leftover developer cfgs in the options menu. None of that was me breaking the console's security - the JTAG hack already did the heavy lifting there. It was mostly poking at file formats and seeing what the game would let me get away with.</p>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="ch-engines">
+        <div class="chapter-head">
+          <p class="section-label"><span class="mark" aria-hidden="true"></span>Engines</p>
+          <h2 class="chapter-title" id="ch-engines">Every engine I could get my hands on</h2>
+        </div>
+        <div class="prose">
+          <p>Modding one game teaches you that game. Modding a bunch of them teaches you how games are actually built. I worked my way through every major engine of that era: the Quake lineage under Call of Duty, Unreal in Gears of War, CryEngine in Crysis, and Anvil in Assassin's Creed. Different studios and different decades of code, but once you know where to look, it's pretty much the same handful of patterns underneath.</p>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="ch-pc">
+        <div class="chapter-head">
+          <p class="section-label"><span class="mark" aria-hidden="true"></span>PC</p>
+          <h2 class="chapter-title" id="ch-pc">Down to the kernel</h2>
+        </div>
+        <div class="prose">
+          <p>My first PC cheat was for CS:GO, and I built it because I was sick of smurfs. From there it escalated the way it always does: user-mode stops being enough, so you learn kernel drivers, and to write kernel drivers you have to actually understand <strong>Windows internals</strong>. Then the kernel stops being enough too, so you go lower: hypervisors, then bare metal. I wrote cheats, and for a while I helped run them too - behind the scenes, not as a name anyone would recognize.</p>
+          <p>I learned a lot of it in public, in communities like se7ensins, TheTechGame, and UnknownCheats. I'm not going to list the handles I used there - they're retired, and they're staying that way :3</p>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="ch-turn">
+        <div class="chapter-head">
+          <p class="section-label"><span class="mark" aria-hidden="true"></span>The turn</p>
+          <h2 class="chapter-title" id="ch-turn">Why I stopped</h2>
+        </div>
+        <div class="prose">
+          <p>Every cheat has someone on the other side of the match. For a long time I told myself it was just me versus the anti-cheat, a technical puzzle and nothing more. It wasn't. It was me ruining people's nights when all they wanted was to play a game, cutting into the bottom line of the studio that made it, and keeping their employees up at night or stuck in overtime cleaning up after me. Once that clicked, I was done.</p>
+          <p>I stopped before I took my first anti-cheat job, and I haven't built a cheat to use against anyone since. The only cheats I build now are against systems I'm authorized to attack, so I can find the holes before someone else does.</p>
+        </div>
+        <p class="callout">I'm not proud of that era, but I'm not going to hide it either. I basically learned this job by being the problem first - usually at someone else's expense.</p>
+      </section>
+
+      <section class="chapter" aria-labelledby="ch-career">
+        <div class="chapter-head">
+          <p class="section-label"><span class="mark" aria-hidden="true"></span>Career</p>
+          <h2 class="chapter-title" id="ch-career">Switching sides</h2>
+        </div>
+        <ol class="timeline" role="list">
+          <li class="tl-item is-current">
+            <p class="tl-dates">Nov 2024 &ndash; Present</p>
+            <h3 class="tl-role">Senior Engineer II</h3>
+            <p class="tl-org"><span class="redacted" aria-hidden="true">[redacted]</span><span class="visually-hidden">Company name redacted</span></p>
+            <p class="tl-body">Still on the defending side. That's all you're getting out of me.</p>
+          </li>
+          <li class="tl-item">
+            <p class="tl-dates">Oct 2020 &ndash; Sep 2024</p>
+            <h3 class="tl-role">Security Engineer</h3>
+            <p class="tl-org">Rockstar Games</p>
+            <ol class="tl-steps" role="list" aria-label="Roles held">
+              <li>Game Security Analyst</li>
+              <li>Game Security Engineer</li>
+              <li>Security Engineer</li>
+            </ol>
+            <p class="tl-body">Anti-cheat and anti-piracy across all titles, with a lot of time spent deep in LLVM and DRM.</p>
+          </li>
+          <li class="tl-item">
+            <p class="tl-dates">Jan 2018 &ndash; Oct 2019</p>
+            <h3 class="tl-role">Lead Software Engineer</h3>
+            <p class="tl-org">Mutiny Digital Group</p>
+            <p class="tl-body">Built a proprietary Windows security framework, and took apart competing anti-cheats and malware to see exactly what we were up against. Started while I was still at Badlion and ESL.</p>
+          </li>
+          <li class="tl-item">
+            <p class="tl-dates">Oct 2016 &ndash; Oct 2018</p>
+            <h3 class="tl-role">Lead Software Engineer</h3>
+            <p class="tl-org">Badlion, LLC</p>
+            <p class="tl-body">Led native development of the Badlion Client (3.5M downloads, 40K daily users) and implemented Badlion Anticheat (BAC) as a SaaS product.</p>
+          </li>
+          <li class="tl-item">
+            <p class="tl-dates">Oct 2016 &ndash; Oct 2018</p>
+            <h3 class="tl-role">Anticheat Developer</h3>
+            <p class="tl-org">ESL FACEIT Group</p>
+            <p class="tl-body">Improved ESL Anticheat, used by 9M+ players across 30+ titles including CS:GO and PUBG. Same two years as Badlion - I was doing both at once.</p>
+          </li>
+          <li class="tl-item">
+            <p class="tl-dates">2013 &ndash; 2015</p>
+            <h3 class="tl-role">BS, Game Development</h3>
+            <p class="tl-org">Full Sail University</p>
+            <p class="tl-body">Graduated with the Course Director Award.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="chapter" aria-labelledby="ch-toolbox">
+        <div class="chapter-head">
+          <p class="section-label"><span class="mark" aria-hidden="true"></span>Toolbox</p>
+          <h2 class="chapter-title" id="ch-toolbox">What I work with</h2>
+        </div>
+        <div class="skills">
+          <div class="skill-group">
+            <h3>Specialties</h3>
+            <ul class="chips" role="list"><li>Reverse engineering</li><li>Anti-cheat</li><li>Anti-tamper</li><li>Anti-piracy</li><li>DRM</li><li>Malware analysis</li><li>Secure coding</li><li>Red-teaming</li><li>Data analysis</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>AI</h3>
+            <ul class="chips" role="list"><li>Agentic workflows</li><li>MCP</li><li>LLM integrations</li><li>Automation</li><li>Computer vision</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Architectures</h3>
+            <ul class="chips" role="list"><li>x86 / x64</li><li>PowerPC</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Systems</h3>
+            <ul class="chips" role="list"><li>Windows internals</li><li>Kernel drivers</li><li>Hypervisors</li><li>Bare metal</li><li>Console internals</li><li>JVM</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Languages</h3>
+            <ul class="chips" role="list"><li>C</li><li>C++</li><li>C#</li><li>Java</li><li>JavaScript</li><li>Lua</li><li>Python</li><li>SQL</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>RE and debugging</h3>
+            <ul class="chips" role="list"><li>IDA Pro</li><li>Ghidra</li><li>x64dbg</li><li>WinDbg</li><li>pwndbg</li><li>Cheat Engine</li><li>ReClass</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Development</h3>
+            <ul class="chips" role="list"><li>LLVM</li><li>Clang</li><li>Visual Studio</li><li>React</li><li>Node.js</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Virtualization</h3>
+            <ul class="chips" role="list"><li>VMware Workstation</li><li>Hyper-V</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Engines</h3>
+            <ul class="chips" role="list"><li>Unreal</li><li>Unity</li><li>Godot</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Rendering</h3>
+            <ul class="chips" role="list"><li>DirectX</li><li>OpenGL</li></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" aria-labelledby="ch-now">
+        <div class="chapter-head">
+          <p class="section-label"><span class="mark" aria-hidden="true"></span>Now</p>
+          <h2 class="chapter-title" id="ch-now">Why this blog exists</h2>
+        </div>
+        <div class="prose">
+          <p>I learned reverse engineering from other people's write-ups, so this is me returning the favor: deep dives done the old-fashioned way, experiments with AI in the loop, side projects, and the occasional opinion. If you're just getting started, you don't need much. Writing trainers for Flash games was enough for me back then, and a single-player game, Cheat Engine and Ghidra will get you just as far today.</p>
+          <p>And if you're writing cheats right now and wondering whether those skills could ever pay for a legit career: <strong>they can</strong>. The industry hires people like us. I'm one of them. Switch while it's still easy to walk away. It only gets harder the deeper you're in.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/blog/">Read the blog {{ icons.svg("arrow-right", 16) }}</a>
+          <a class="btn btn-ghost" href="{{ site.twitterUrl }}" rel="me noopener" target="_blank">{{ icons.xlogo(14) }}Follow @{{ site.twitter }}</a>
+        </div>
+      </section>
+    </div>
+
+    <aside class="facts" aria-labelledby="facts-title">
+      <div class="facts-head"><p class="kicker" id="facts-title"><span class="prompt">$</span> whoami</p></div>
+      <dl>
+        <div><dt>Name</dt><dd>{{ site.author }}</dd></div>
+        <div><dt>From</dt><dd>New York</dd></div>
+        <div><dt>Experience</dt><dd><span class="num">15+</span> years in RE</dd><dd><span class="num">10+</span> years in the gaming industry</dd></div>
+        <div><dt>Now</dt><dd>Senior Engineer II<small>[redacted]</small></dd></div>
+        <div><dt>Previously</dt><dd>Rockstar Games<small>Anti-cheat and anti-piracy</small></dd></div>
+        <div><dt>Education</dt><dd>Full Sail University<small>BS Game Development, Course Director Award</small></dd></div>
+        <div><dt>Elsewhere</dt><dd><a href="{{ site.twitterUrl }}" rel="me noopener" target="_blank">@{{ site.twitter }}</a></dd><dd><a href="{{ site.linkedinUrl }}" rel="me noopener" target="_blank">LinkedIn</a></dd></div>
+      </dl>
+    </aside>
+  </div>
+</div>

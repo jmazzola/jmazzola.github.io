@@ -1,0 +1,52 @@
+---
+layout: base.njk
+title: Blog
+description: "Every post by Justin Mazzola, ex-cheat dev turned security engineer: reverse engineering with and without AI, side projects, and security research notes."
+permalink: /blog/
+---
+{%- import "icons.njk" as icons -%}
+{%- set total = collections.posts | length -%}
+<header class="page-head">
+  <div class="shell">
+    <p class="kicker"><span class="mark" aria-hidden="true"></span>Blog</p>
+    <h1 class="page-title">Notes from the disassembler.</h1>
+    <p class="page-lead">Reverse engineering with and without AI, side projects built on vibes, and the occasional thought about game security. Newest first.</p>
+  </div>
+</header>
+
+<section class="shell" aria-label="Posts">
+  {%- if total %}
+  <div class="filters" data-filter-root>
+    <div class="filter-group" role="group" aria-label="Filter posts by category">
+      <button class="filter-btn" type="button" aria-pressed="true" data-filter="all" data-label="All">All <span class="filter-count">{{ total }}</span></button>
+      {%- for slug in site.categoryOrder %}
+      {%- set count = collections.posts | filterByCategory(slug) | length %}
+      {%- if count > 0 %}
+      <button class="filter-btn cat-{{ slug }}" type="button" aria-pressed="false" data-filter="{{ slug }}" data-label="{{ site.categories[slug].name }}"><span class="cat-swatch" aria-hidden="true"></span>{{ site.categories[slug].name }} <span class="filter-count">{{ count }}</span></button>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+    <p class="filter-status" aria-live="polite" data-filter-status>Showing <b>{{ total }}</b> of <b>{{ total }}</b> {{ "post" if total == 1 else "posts" }}</p>
+  </div>
+
+  <ul class="post-list" role="list" data-post-list>
+    {%- for post in collections.posts %}
+    {% include "post-row.njk" %}
+    {%- endfor %}
+  </ul>
+
+  <div class="empty" hidden data-filter-empty>
+    {{ icons.svg("search-x", 22) }}
+    <h2 class="empty-title">Nothing filed here yet</h2>
+    <p>No posts in <span data-filter-empty-name>this category</span> so far. It's on the list.</p>
+    <button class="empty-btn" type="button" data-filter-reset>Show all posts</button>
+  </div>
+  {%- else %}
+  <div class="empty empty-standalone">
+    {{ icons.svg("terminal", 22) }}
+    <h2 class="empty-title">Nothing published yet</h2>
+    <p>The first write-up is still in the debugger. Follow <a class="text-link" href="{{ site.twitterUrl }}" rel="noopener" target="_blank">@{{ site.twitter }}</a> to catch it when it lands.</p>
+  </div>
+  {%- endif %}
+  <div class="list-end" aria-hidden="true"></div>
+</section>

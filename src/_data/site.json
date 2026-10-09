@@ -1,0 +1,92 @@
+{
+  "title": "justmazz",
+  "author": "Justin Mazzola",
+  "jobTitle": "Senior Security Engineer",
+  "tagline": "software/reverse engineer | ex-cheat dev | senior security engineer",
+  "quips": [
+    "No kernel drivers were manually mapped in the making of this site.",
+    "Pair-programmed with Claude. Verified by me, a dumb human.",
+    "Claude wrote most of the site. All the corny jokes are mine though.",
+    "This site has no anti-cheat. Please behave.",
+    "Zero DRM. View source and look at all the slop Claude made.",
+    "Static HTML: nothing to inject, nothing to hook. You checked the 404 page, didn't you?",
+    "No HWIDs were spoofed in the making of this site.",
+    "Running in ring 3, like a responsible adult.",
+    "0 detections. 0 bans. 0 cookies saved.",
+    "No vtables were harmed. A few were shadow hooked though.",
+    "Patched, not cracked."
+  ],
+  "description": "Justin Mazzola, ex-cheat dev turned senior security engineer. Notes on reverse engineering, anti-cheat, Windows internals, and building things with and without AI.",
+  "url": "https://jmazzola.github.io",
+  "locale": "en_US",
+  "lang": "en",
+  "twitter": "justmazz",
+  "twitterUrl": "https://x.com/justmazz",
+  "linkedinUrl": "https://www.linkedin.com/in/justinmazzola",
+  "since": 2026,
+  "theme": "titanium",
+  "themes": {
+    "titanium": {
+      "name": "omp titanium",
+      "label": "Titanium",
+      "swatch": ["#151820", "#00b4ff"],
+      "themeColor": "#0f1216",
+      "favicon": "/img/favicon-titanium.svg",
+      "css": "/css/theme-titanium.css"
+    },
+    "amber": {
+      "name": "Warm amber",
+      "label": "Amber",
+      "swatch": ["#0a0b10", "#f4b45f"],
+      "themeColor": "#0a0b10",
+      "favicon": "/img/favicon.svg"
+    },
+    "ida": {
+      "name": "My IDA Theme",
+      "label": "IDA",
+      "swatch": ["#282a36", "#bd93f9"],
+      "themeColor": "#1c1d25",
+      "favicon": "/img/favicon-ida.svg",
+      "css": "/css/theme-ida.css"
+    },
+    "light": {
+      "name": "Light",
+      "label": "Light",
+      "tip": "Light (are you sure?)",
+      "swatch": ["#f7f5f1", "#a35407"],
+      "themeColor": "#f7f5f1",
+      "favicon": "/img/favicon-light.svg",
+      "css": "/css/theme-light.css"
+    },
+    "1337": {
+      "name": "1337",
+      "label": "1337",
+      "tip": "1337 (you found it)",
+      "hidden": true,
+      "notice": ["HACK THE PLANET", "You're in. 1337 now lives in your theme picker."],
+      "swatch": ["#000000", "#00ff41"],
+      "themeColor": "#000000",
+      "favicon": "/img/favicon-1337.svg",
+      "css": "/css/theme-1337.css"
+    }
+  },
+  "categories": {
+    "vibe-coded": {
+      "name": "Vibe Coded",
+      "blurb": "Side projects I built fast and for fun. Sometimes they get promoted into other things that aren't slop."
+    },
+    "re-with-ai": {
+      "name": "RE with AI",
+      "blurb": "Reverse engineering with models in the loop, including the parts that go wrong."
+    },
+    "sans-ai": {
+      "name": "Sans-AI",
+      "blurb": "Doing things 'the old way'. Using debuggers, a disassembler, an IDE, and a ton of patience."
+    },
+    "thoughts": {
+      "name": "Thoughts",
+      "blurb": "Research notes, rants, and security musings that don't fit anywhere else on this site."
+    }
+  },
+  "categoryOrder": ["vibe-coded", "re-with-ai", "sans-ai", "thoughts"]
+}

@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Theme: 1337 (hidden)
+   Green phosphor on black, pixel fonts, CRT scanlines. Deliberately corny.
+   Not in the picker until someone sets localStorage "theme" to "1337"
+   (or opens a page with ?theme=1337); main.js unlocks it after that.
+   The fonts below only download while this theme is active.
+   ========================================================================== */
+
+@font-face { font-family: "VT323"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/vt323-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Press Start 2P"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/press-start-2p-latin-400-normal.woff2") format("woff2"); }
+
+:root[data-theme="1337"] {
+  /* surfaces */
+  --bg: #000000;
+  --bg-raise: #020803;
+  --surface: #041006;
+  --surface-2: #08200d;
+  --code-bg: #010601;
+
+  /* hairlines */
+  --line: rgba(0, 255, 65, 0.16);
+  --line-strong: rgba(0, 255, 65, 0.32);
+
+  /* ink: phosphor green, dimmer the less it matters */
+  --ink: #5cff7f;
+  --ink-soft: #33e85c;
+  --ink-mute: #22a843;
+  --ink-faint: #16702c;
+
+  /* accent */
+  --accent: #00ff41;
+  --accent-strong: #9dffb0;
+  --accent-ink: #001a07;
+  --accent-rgb: 0, 255, 65;
+  --glow-rgb: 0, 255, 65;
+
+  /* component surfaces */
+  --header-bg: rgba(0, 0, 0, 0.86);
+  --dump-bg: linear-gradient(180deg, rgba(4, 16, 6, 0.95), rgba(0, 0, 0, 0.96));
+  --dump-hex: #22a843;
+  --code-ink: #5cff7f;
+
+  /* category marks: four flavors of green */
+  --cat-vibe-coded: #b8ff3c;
+  --cat-re-with-ai: #00ff41;
+  --cat-sans-ai: #3cffb4;
+  --cat-thoughts: #9dffb0;
+
+  /* type: VT323 for reading, Press Start 2P for shouting */
+  --font-sans: "VT323", ui-monospace, Consolas, monospace;
+  --font-mono: "VT323", ui-monospace, Consolas, monospace;
+  --font-code: "VT323", ui-monospace, Consolas, monospace;
+
+  --radius: 0;
+  --radius-sm: 0;
+}
+
+/* VT323 is tiny at normal sizes, so everything goes up a notch */
+:root[data-theme="1337"] body {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  text-shadow: 0 0 4px rgba(0, 255, 65, 0.45);
+}
+:root[data-theme="1337"] .prose { font-size: 1.35rem; line-height: 1.45; }
+:root[data-theme="1337"] code,
+:root[data-theme="1337"] pre { font-size: 1.1em; }
+
+/* headings and the wordmark get the 8-bit treatment */
+:root[data-theme="1337"] h1,
+:root[data-theme="1337"] h2,
+:root[data-theme="1337"] h3,
+:root[data-theme="1337"] h4,
+:root[data-theme="1337"] .wordmark,
+:root[data-theme="1337"] .footer-mark {
+  font-family: "Press Start 2P", "VT323", monospace;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+:root[data-theme="1337"] .page-title { font-size: clamp(1.5rem, 1rem + 2.6vw, 2.6rem); }
+:root[data-theme="1337"] .post-title { font-size: clamp(1.25rem, 0.9rem + 1.8vw, 2rem); }
+:root[data-theme="1337"] .prose h2 { font-size: 1.15rem; }
+:root[data-theme="1337"] .prose h3 { font-size: 0.95rem; }
+
+/* The footer watermark: Press Start 2P is about twice as wide as Azeret Mono, so it needs a much
+   smaller size to stay in its column, and the body glow has to go or the clipped text smears. */
+:root[data-theme="1337"] .footer-sign { min-width: 0; }
+:root[data-theme="1337"] .footer-mark {
+  font-size: clamp(1.75rem, 8vw, 5.5rem);
+  line-height: 1.1;
+  text-shadow: none;
+  background: linear-gradient(180deg, rgba(0, 255, 65, 0.3), rgba(0, 255, 65, 0.06));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* CRT scanlines over everything (the lightbox sits in the top layer, above this) */
+:root[data-theme="1337"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.22) 2px 3px);
+}
+
+:root[data-theme="1337"] ::selection { background: #00ff41; color: #000; text-shadow: none; }
+
+/* syntax tokens: green on green on green */
+:root[data-theme="1337"] .token.comment,
+:root[data-theme="1337"] .token.prolog,
+:root[data-theme="1337"] .token.doctype,
+:root[data-theme="1337"] .token.cdata { color: #16702c; }
+:root[data-theme="1337"] .token.punctuation,
+:root[data-theme="1337"] .token.operator { color: #33e85c; }
+:root[data-theme="1337"] .token.keyword,
+:root[data-theme="1337"] .token.important,
+:root[data-theme="1337"] .token.atrule { color: #9dffb0; }
+:root[data-theme="1337"] .token.function,
+:root[data-theme="1337"] .token.class-name,
+:root[data-theme="1337"] .token.builtin { color: #b8ff3c; }
+:root[data-theme="1337"] .token.string,
+:root[data-theme="1337"] .token.char,
+:root[data-theme="1337"] .token.attr-value,
+:root[data-theme="1337"] .token.regex { color: #3cffb4; }
+:root[data-theme="1337"] .token.number,
+:root[data-theme="1337"] .token.boolean,
+:root[data-theme="1337"] .token.constant { color: #00ff41; }
+
+/* "you're in" notice (shown by main.js). It only ever appears in this theme. */
+.theme-notice {
+  position: fixed;
+  top: calc(var(--header-h) + 1rem);
+  right: 1rem;
+  z-index: 9999;
+  max-width: min(24rem, calc(100vw - 2rem));
+  padding: 0.9rem 1.1rem 1rem;
+  font-family: "VT323", ui-monospace, Consolas, monospace;
+  color: #5cff7f;
+  background: #000;
+  border: 2px solid #00ff41;
+  box-shadow: 0 0 24px rgba(0, 255, 65, 0.35), inset 0 0 18px rgba(0, 255, 65, 0.12);
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
+  cursor: pointer;
+  animation: theme-notice-in 260ms steps(4);
+}
+.theme-notice.is-leaving { opacity: 0; transition: opacity 300ms steps(3); }
+.theme-notice-prompt { font-size: 1.15rem; color: #22a843; }
+.theme-notice-title {
+  margin-top: 0.35rem;
+  font-family: "Press Start 2P", "VT323", monospace;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #00ff41;
+}
+.theme-notice-body { margin-top: 0.5rem; font-size: 1.25rem; line-height: 1.3; }
+.theme-notice-body::after {
+  content: "_";
+  margin-left: 0.15em;
+  animation: theme-notice-caret 1s steps(1) infinite;
+}
+@keyframes theme-notice-in { from { opacity: 0; transform: translateY(-6px); } }
+@keyframes theme-notice-caret { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .theme-notice, .theme-notice-body::after { animation: none; }
+}

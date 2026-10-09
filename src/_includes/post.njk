@@ -1,0 +1,76 @@
+---
+layout: base.njk
+---
+{%- import "icons.njk" as icons -%}
+{%- set cat = site.categories[category] -%}
+{%- set newer = collections.posts | getPreviousCollectionItem(page) -%}
+{%- set older = collections.posts | getNextCollectionItem(page) -%}
+{%- set toc = content | toc -%}
+<article class="post">
+  <header class="post-header">
+    <div class="shell">
+      <div class="post-head">
+        <a class="back-link" href="/blog/">{{ icons.svg("arrow-left", 16) }}All posts</a>
+        <p class="kicker">
+          <a class="cat cat-{{ category }}" href="/blog/?category={{ category }}">{{ cat.name }}</a>
+        </p>
+        <h1 class="post-title">{{ title }}</h1>
+        {%- if description %}
+        <p class="post-dek">{{ description }}</p>
+        {%- endif %}
+        <dl class="post-meta">
+          <div><dt class="visually-hidden">Published</dt><dd><time datetime="{{ page.date | isoDate }}">{{ page.date | dateFormat }}</time></dd></div>
+          <div><dt class="visually-hidden">Length</dt><dd>{{ content | readingTime }}</dd></div>
+          <div><dt class="visually-hidden">Author</dt><dd><a href="/about/">{{ site.author }}</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell post-layout">
+    <div class="post-main">
+      <div class="prose">
+        {{ content | safe }}
+      </div>
+
+      <footer class="post-footer">
+        <div class="signoff">
+          <p class="signoff-label">Written by</p>
+          <p class="signoff-name"><a href="/about/">{{ site.author }}</a></p>
+          <p class="signoff-bio">Ex-cheat dev turned security engineer. 15+ years taking software apart, the last decade or so on the defending side.</p>
+          <a class="text-link" href="https://x.com/intent/post?text={{ (title ~ ' by @' ~ site.twitter) | urlencode }}&amp;url={{ (site.url ~ page.url) | urlencode }}" target="_blank" rel="noopener">{{ icons.xlogo(13) }}Discuss on X</a>
+        </div>
+
+        {%- if newer or older %}
+        <nav class="pager" aria-label="More posts">
+          {%- if older %}
+          <a class="pager-link pager-older" href="{{ older.url }}">
+            <span class="pager-dir">{{ icons.svg("arrow-left", 14) }}Older</span>
+            <span class="pager-title">{{ older.data.title }}</span>
+          </a>
+          {%- endif %}
+          {%- if newer %}
+          <a class="pager-link pager-newer" href="{{ newer.url }}">
+            <span class="pager-dir">Newer{{ icons.svg("arrow-right", 14) }}</span>
+            <span class="pager-title">{{ newer.data.title }}</span>
+          </a>
+          {%- endif %}
+        </nav>
+        {%- endif %}
+      </footer>
+    </div>
+
+    {%- if toc | length > 1 %}
+    <aside class="post-rail">
+      <nav class="toc" aria-labelledby="toc-label" data-toc>
+        <p class="section-label toc-label" id="toc-label"><span class="mark" aria-hidden="true"></span>On this page</p>
+        <ol class="toc-list" role="list">
+          {%- for item in toc %}
+          <li><a class="toc-link" href="#{{ item.id }}">{{ item.text | safe }}</a></li>
+          {%- endfor %}
+        </ol>
+      </nav>
+    </aside>
+    {%- endif %}
+  </div>
+</article>

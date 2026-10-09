@@ -1,0 +1,82 @@
+---
+layout: base.njk
+title: Page not found
+description: "This page isn't mapped. Head back to Justin Mazzola's blog on reverse engineering and game security."
+permalink: /404.html
+eleventyExcludeFromCollections: true
+noindex: true
+---
+{%- import "icons.njk" as icons -%}
+{#- One 404.html serves every missing URL. main.js picks a variant from the URL;
+    the payload is only ever inserted with textContent. -#}
+<section class="shell lost" aria-labelledby="lost-title">
+  <div data-lost-variant="default">
+    <p class="lost-code" aria-hidden="true">0xC0000005</p>
+    <h1 class="lost-title" id="lost-title">Access violation.</h1>
+    <pre class="lost-log" aria-label="Error details">Unhandled exception: <a class="hl" href="https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-exception_record#members" rel="noopener" target="_blank">EXCEPTION_ACCESS_VIOLATION</a>
+Attempted to read <span data-lost-path>this page</span>, which is not mapped.</pre>
+    <p class="lead">The page you were looking for doesn't exist, moved, or never made it out of drafts. No crash dump needed.</p>
+  </div>
+
+  <div data-lost-variant="sqli" hidden>
+    <p class="lost-code" aria-hidden="true">' OR 1=1--</p>
+    <h1 class="lost-title">Nice try, Bobby Tables.</h1>
+    <pre class="lost-log" aria-label="Error details">SQLSTATE[<span class="hl">42000</span>]: Syntax error or access violation
+Near: <span class="lost-payload" data-lost-payload></span>
+Rows affected: 0. Tables dropped: 0. Databases found: 0.</pre>
+    <p class="lead">There is no database. This is a static site on GitHub Pages: your query got pattern-matched against a folder of HTML files. Respect for checking, though. <a class="text-link" href="https://xkcd.com/327/" rel="noopener" target="_blank">Say hi to his mom.</a></p>
+  </div>
+
+  <div data-lost-variant="xss" hidden>
+    <p class="lost-code" aria-hidden="true">&lt;script&gt;</p>
+    <h1 class="lost-title">alert(1) not found.</h1>
+    <pre class="lost-log" aria-label="Error details">Refused to execute payload: rendered as <span class="hl">textContent</span>
+Payload: <span class="lost-payload" data-lost-payload></span>
+Status: defused. No cookies were harmed.</pre>
+    <p class="lead">Everything this page echoes back is inserted as plain text, so your payload is now just a string in a box, being looked at. No sinks, no cookies, no session to steal. Good instincts, wrong target.</p>
+  </div>
+
+  <div data-lost-variant="html" hidden>
+    <p class="lost-code" aria-hidden="true">&lt;color=red&gt;</p>
+    <h1 class="lost-title">Nice <span class="lost-red" data-lost-try>try</span>.</h1>
+    <pre class="lost-log" aria-label="Error details">Rich text parser: <span class="hl">not found</span>, so we wrote one
+Input:    <span class="lost-payload" data-lost-payload></span>
+Rendered: <span class="lost-payload" data-lost-rendered></span>
+Colors applied: <span data-lost-colors>0</span>. Sizes changed: 0. Marquees started: 0.</pre>
+    <p class="lead">This isn't game chat. Plenty of games still pipe player names and chat through a rich-text renderer, and <code>&lt;color=red&gt;</code> and <code>&lt;size=500&gt;</code> have started more than a few good bugs. Here everything else stays plain text, but valid colors get applied. Effort deserves something.</p>
+  </div>
+
+  <div data-lost-variant="cs2" hidden>
+    <p class="lost-code" aria-hidden="true">&lt;img src=</p>
+    <h1 class="lost-title">Vote failed.</h1>
+    <div class="vote-panel" role="group" aria-label="Vote kick panel, a parody of the CS2 HUD">
+      <p class="vote-by">
+        <svg class="vote-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="7" r="4" fill="currentColor"/><path fill="currentColor" d="M2 21a8 8 0 0 1 16 0z"/><path d="M3 3l18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <span class="vote-by-text">Vote by: <span data-lost-tag></span></span>
+      </p>
+      <div class="vote-body">
+        <p class="vote-target">Kick<br>player:</p>
+        <div class="vote-img">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="9" r="2" fill="currentColor"/><path d="M21 15l-5-5-6 6M3 21l18-18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>image not loaded</span>
+        </div>
+        <div class="vote-tally">
+          <button class="vote-btn vote-yes" type="button" data-vote="yes" aria-label="Vote yes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="vote-count vote-count-yes" data-vote-count="yes">0</span>
+          <button class="vote-btn vote-no" type="button" data-vote="no" aria-label="Vote no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l8 8M16 8l-8 8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></button>
+          <span class="vote-count vote-count-no" data-vote-count="no">1</span>
+        </div>
+      </div>
+      <p class="vote-you" aria-live="polite">You voted: <span data-vote-you>NO</span></p>
+    </div>
+    <pre class="lost-log" aria-label="Error details">Panorama: <span class="hl">&lt;img&gt;</span> in player name
+Payload: <span class="lost-payload" data-lost-payload></span>
+Image requests sent: 0. IPs leaked: 0. Players kicked: 0.</pre>
+    <p class="lead">Late 2023: CS2 rendered HTML in player names, so a name like this pulled a remote image straight into everyone's vote-kick panel, and with it, everyone's IP address. Valve patched it fast. This page never fetches your image, so nobody's IP goes anywhere. Your vote still counts, though.</p>
+  </div>
+
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="/">{{ icons.svg("arrow-left", 16) }} Back to home</a>
+    <a class="btn btn-ghost" href="/blog/">Browse the blog</a>
+  </div>
+</section>

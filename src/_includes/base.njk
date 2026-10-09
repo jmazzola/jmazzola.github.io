@@ -1,0 +1,169 @@
+{%- import "icons.njk" as icons -%}
+{%- set pageTitle = (title ~ " | " ~ site.title) if title else (site.title ~ " | ex-cheat dev turned security engineer") -%}
+{%- set pageDescription = description or site.description -%}
+{%- set canonical = site.url ~ page.url -%}
+{%- set isPost = category and page.url.indexOf("/blog/") == 0 -%}
+{%- set section = "home" if page.url == "/" else ("about" if page.url.indexOf("/about/") == 0 else ("blog" if page.url.indexOf("/blog/") == 0 else "")) -%}
+{%- set theme = site.themes[site.theme] -%}
+{%- set ogImage = site.url ~ (page.fileSlug | ogImage) -%}
+<!doctype html>
+<html lang="{{ site.lang }}" class="no-js" data-theme="{{ site.theme }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDescription }}">
+  <meta name="author" content="{{ site.author }}">
+  <link rel="canonical" href="{{ canonical }}">
+  {%- if noindex %}
+  <meta name="robots" content="noindex">
+  {%- endif %}
+  <meta name="theme-color" content="{{ theme.themeColor }}">
+  <meta name="color-scheme" content="dark light">
+
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+  <meta property="og:type" content="{{ 'article' if isPost else 'website' }}">
+  <meta property="og:title" content="{{ title or site.author }}">
+  <meta property="og:description" content="{{ pageDescription }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ ogImage }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ title or site.author }}">
+  {%- if isPost %}
+  <meta property="article:published_time" content="{{ page.date | isoDate }}">
+  <meta property="article:author" content="{{ site.author }}">
+  <meta property="article:section" content="{{ site.categories[category].name }}">
+  {%- endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@{{ site.twitter }}">
+  <meta name="twitter:creator" content="@{{ site.twitter }}">
+  <meta name="twitter:title" content="{{ title or site.author }}">
+  <meta name="twitter:description" content="{{ pageDescription }}">
+  <meta name="twitter:image" content="{{ ogImage }}">
+  <meta name="twitter:image:alt" content="{{ title or site.author }}">
+
+  <link rel="icon" href="{{ theme.favicon }}" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="{{ site.title }}">
+
+  <link rel="preload" href="/fonts/azeret-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/ibm-plex-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  {%- for id, t in site.themes %}
+  {%- if t.css %}
+  <link rel="stylesheet" href="{{ t.css }}">
+  {%- endif %}
+  {%- endfor %}
+  <script src="/js/main.js" defer></script>
+
+  {%- if isPost %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ title | dump | safe }},
+    "description": {{ pageDescription | dump | safe }},
+    "datePublished": "{{ page.date | isoDate }}",
+    "url": "{{ canonical }}",
+    "mainEntityOfPage": "{{ canonical }}",
+    "articleSection": {{ site.categories[category].name | dump | safe }},
+    "author": { "@type": "Person", "name": "{{ site.author }}", "url": "{{ site.url }}/about/" }
+  }
+  </script>
+  {%- elif section == "home" or section == "about" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ site.author }}",
+    "alternateName": "justmazz",
+    "jobTitle": "{{ site.jobTitle }}",
+    "description": "Ex-cheat dev turned senior security engineer, specializing in reverse engineering, anti-cheat, and anti-piracy.",
+    "url": "{{ site.url }}/about/",
+    "sameAs": ["{{ site.twitterUrl }}"],
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Full Sail University" },
+    "knowsAbout": ["Reverse engineering", "Anti-cheat", "Anti-piracy", "DRM", "LLVM", "Windows internals", "Kernel drivers", "x86", "PowerPC"]
+  }
+  </script>
+  {%- endif %}
+  <script>
+  (function () {
+    var d = document.documentElement, themes = {{ site.themes | dump | safe }}, t;
+    d.classList.replace("no-js", "js");
+    try { t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("theme"); } catch (e) {}
+    if (t && themes[t] && t !== d.dataset.theme) {
+      d.dataset.theme = t;
+      document.querySelector('link[rel="icon"]').href = themes[t].favicon;
+      document.querySelector('meta[name="theme-color"]').content = themes[t].themeColor;
+    }
+  })();
+  </script>
+</head>
+<body class="page-{{ section or 'misc' }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-nav>
+    <div class="shell header-inner">
+      <a class="wordmark" href="/" aria-label="{{ site.title }}, home">
+        <span class="wordmark-prompt" aria-hidden="true">~/</span><span class="wordmark-name">justmazz</span><span class="wordmark-caret" aria-hidden="true"></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle-open">{{ icons.svg("menu", 22) }}</span>
+        <span class="nav-toggle-close">{{ icons.svg("close", 22) }}</span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary" data-nav-panel>
+        <div class="site-nav-inner">
+          <ul class="nav-list" role="list">
+            <li><a class="nav-link" href="/"{% if section == "home" %} aria-current="page"{% endif %}><span class="nav-index" aria-hidden="true">00</span>Home</a></li>
+            <li><a class="nav-link" href="/about/"{% if section == "about" %} aria-current="page"{% endif %}><span class="nav-index" aria-hidden="true">01</span>About</a></li>
+            <li><a class="nav-link" href="/blog/"{% if section == "blog" %} aria-current="{{ 'page' if page.url == '/blog/' else 'true' }}"{% endif %}><span class="nav-index" aria-hidden="true">02</span>Blog</a></li>
+          </ul>
+          <a class="nav-social" href="{{ site.twitterUrl }}" rel="me noopener" target="_blank">{{ icons.xlogo(15) }}<span>@{{ site.twitter }}</span></a>
+          <div class="theme-picker" role="group" aria-label="Color theme" data-theme-picker data-themes="{{ site.themes | dump | forceescape }}">
+            {#- hidden themes render last ("1337" is an integer-like key, so JS puts it first) and stay hidden until unlocked -#}
+            {%- for pass in [false, true] %}
+            {%- for id, t in site.themes %}
+            {%- if (t.hidden or false) == pass %}
+            <button class="theme-option" type="button" data-theme-choice="{{ id }}" aria-pressed="{{ 'true' if id == site.theme else 'false' }}"{% if t.hidden %} hidden{% endif %} style="--sw-bg: {{ t.swatch[0] }}; --sw-accent: {{ t.swatch[1] }}"><span class="theme-swatch" aria-hidden="true"></span><span class="theme-label">{{ t.label }}</span><span class="tip" aria-hidden="true">{{ t.tip or t.name }}</span></button>
+            {%- endif %}
+            {%- endfor %}
+            {%- endfor %}
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-top">
+        <div class="footer-sign">
+          <p class="footer-mark" aria-hidden="true">justmazz</p>
+          <p class="footer-quip" data-quips="{{ site.quips | dump | forceescape }}">{{ site.quips | pickBy(page.url) }}</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+          <ul role="list">
+            <li><a href="/about/">About</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/feed.xml">{{ icons.svg("rss", 14) }}RSS</a></li>
+            <li><a href="{{ site.twitterUrl }}" rel="me noopener" target="_blank">{{ icons.xlogo(13) }}@{{ site.twitter }}</a></li>
+            <li><a href="{{ site.linkedinUrl }}" rel="me noopener" target="_blank">{{ icons.linkedin(13) }}LinkedIn</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; {{ build.year }} {{ site.author }}. Opinions are my own, not my employer's. Built with help from <a href="https://claude.ai" rel="noopener" target="_blank">Claude</a>.</p>
+        <p class="footer-legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

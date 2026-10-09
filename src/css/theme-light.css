@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Theme: Light (you were warned)
+   Warm paper surfaces; the amber accent darkened to keep text contrast >= 4.5:1.
+   Active when <html data-theme="light">. Chosen via the header theme picker.
+   ========================================================================== */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg: #f7f5f1;
+  --bg-raise: #f1eee8;
+  --surface: #ffffff;
+  --surface-2: #ebe7df;
+  --code-bg: #fbfaf7;
+
+  /* hairlines */
+  --line: rgba(40, 34, 24, 0.1);
+  --line-strong: rgba(40, 34, 24, 0.18);
+
+  /* ink */
+  --ink: #1d1b17;
+  --ink-soft: #45413a;
+  --ink-mute: #6b655a;
+  --ink-faint: #a39d90;
+
+  /* accent */
+  --accent: #a35407;
+  --accent-strong: #8a4605;
+  --accent-ink: #ffffff;
+  --accent-rgb: 163, 84, 7;
+  --glow-rgb: 14, 116, 144;
+
+  /* component surfaces */
+  --header-bg: rgba(247, 245, 241, 0.85);
+  --dump-bg: linear-gradient(180deg, #ffffff, #f6f3ee);
+  --dump-hex: #6b655a;
+  --code-ink: #2b2822;
+
+  /* category marks */
+  --cat-vibe-coded: #a35407;
+  --cat-re-with-ai: #0e7490;
+  --cat-sans-ai: #b8441f;
+  --cat-thoughts: #556070;
+
+  /* depth: soft, low-alpha shadows instead of the dark themes' heavy ones */
+  --shadow-soft:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 1px 2px rgba(40, 34, 24, 0.06),
+    0 8px 24px -14px rgba(40, 34, 24, 0.18);
+  --shadow-raised:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 2px 4px rgba(40, 34, 24, 0.05),
+    0 18px 48px -20px rgba(40, 34, 24, 0.22);
+}
+
+/* dark-theme tints that are invisible on paper */
+:root[data-theme="light"] ::selection { background: rgba(163, 84, 7, 0.2); color: var(--ink); }
+:root[data-theme="light"] body::after { opacity: 0.03; }
+:root[data-theme="light"] .nav-link:hover { background: rgba(40, 34, 24, 0.05); }
+:root[data-theme="light"] .site-header.is-open .site-nav { box-shadow: 0 24px 48px -24px rgba(40, 34, 24, 0.25); }
+:root[data-theme="light"] .post-link::before { background: rgba(40, 34, 24, 0.035); }
+:root[data-theme="light"] .filter-btn:hover { border-color: rgba(40, 34, 24, 0.3); }
+:root[data-theme="light"] .prose .code-head { background: rgba(40, 34, 24, 0.03); }
+:root[data-theme="light"] .footer-mark { background: linear-gradient(180deg, rgba(29, 27, 23, 0.12), rgba(29, 27, 23, 0.02)); -webkit-background-clip: text; background-clip: text; }
+
+/* syntax tokens */
+:root[data-theme="light"] .token.comment,
+:root[data-theme="light"] .token.prolog,
+:root[data-theme="light"] .token.doctype,
+:root[data-theme="light"] .token.cdata { color: #857f72; }
+:root[data-theme="light"] .token.punctuation { color: #6b655a; }
+:root[data-theme="light"] .token.keyword,
+:root[data-theme="light"] .token.important,
+:root[data-theme="light"] .token.atrule,
+:root[data-theme="light"] .token.rule { color: #a35407; }
+:root[data-theme="light"] .token.function,
+:root[data-theme="light"] .token.function-variable { color: #0e6a85; }
+:root[data-theme="light"] .token.class-name,
+:root[data-theme="light"] .token.builtin,
+:root[data-theme="light"] .token.type,
+:root[data-theme="light"] .token.namespace { color: #7a5600; }
+:root[data-theme="light"] .token.string,
+:root[data-theme="light"] .token.char,
+:root[data-theme="light"] .token.attr-value,
+:root[data-theme="light"] .token.regex,
+:root[data-theme="light"] .token.template-string { color: #2f7a34; }
+:root[data-theme="light"] .token.number,
+:root[data-theme="light"] .token.boolean,
+:root[data-theme="light"] .token.constant,
+:root[data-theme="light"] .token.symbol { color: #b8441f; }
+:root[data-theme="light"] .token.operator,
+:root[data-theme="light"] .token.entity,
+:root[data-theme="light"] .token.url { color: #45413a; }
+:root[data-theme="light"] .token.property,
+:root[data-theme="light"] .token.attr-name,
+:root[data-theme="light"] .token.tag,
+:root[data-theme="light"] .token.selector { color: #3a57a5; }
+:root[data-theme="light"] .token.macro,
+:root[data-theme="light"] .token.directive,
+:root[data-theme="light"] .token.register { color: #8a3fa8; }
+:root[data-theme="light"] .token.variable,
+:root[data-theme="light"] .token.parameter { color: #1d1b17; }
+:root[data-theme="light"] .token.deleted { color: #b42318; }
+:root[data-theme="light"] .token.inserted { color: #2f7a34; }

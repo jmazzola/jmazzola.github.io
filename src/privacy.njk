@@ -1,0 +1,50 @@
+---
+layout: base.njk
+title: Privacy
+description: "Privacy policy for justmazz, Justin Mazzola's blog. No cookies, no analytics, no tracking."
+permalink: /privacy/
+---
+<header class="page-head">
+  <div class="shell shell-narrow">
+    <p class="kicker"><span class="mark" aria-hidden="true"></span>Legal</p>
+    <h1 class="page-title">Privacy</h1>
+    <p class="page-lead">Nothing tracks you here. I don't even know why I have to make one of these, but that's the deal with modern websites! No cookies, no analytics, no ad scripts, no fingerprinting, nothing.</p>
+  </div>
+</header>
+
+<div class="shell shell-narrow legal">
+  <section class="chapter" aria-labelledby="pv-collect">
+    <div class="chapter-head">
+      <p class="section-label"><span class="mark" aria-hidden="true"></span>Data</p>
+      <h2 class="chapter-title" id="pv-collect">What this site collects</h2>
+    </div>
+    <div class="prose">
+      <p>Nothing about you. It's literally a plain static site: plain HTML, CSS, and a little JavaScript for some interactive features. There are no forms, accounts or comments, and hell, not even a newsletter.</p>
+      <p>The only thing I store is your theme choice, which lives in <code>localStorage</code>. Feel free to clear your site data and it's gone.</p>
+    </div>
+  </section>
+
+  <section class="chapter" aria-labelledby="pv-third">
+    <div class="chapter-head">
+      <p class="section-label"><span class="mark" aria-hidden="true"></span>Third parties</p>
+      <h2 class="chapter-title" id="pv-third">Who else sees the request</h2>
+    </div>
+    <div class="prose">
+      <ul>
+        <li><strong>Hosting.</strong> It's just GitHub Pages, man. Whatever GitHub be doing, they do. See the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">GitHub Privacy Statement</a>.</li>
+        <li><strong>Fonts.</strong> Typefaces are served from this site, not a CDN, so no third party sees you load them.</li>
+        <li><strong>External links.</strong> Links to X (Twitter) or other sites are governed by those sites' own policies once you click on them.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" aria-labelledby="pv-contact">
+    <div class="chapter-head">
+      <p class="section-label"><span class="mark" aria-hidden="true"></span>Contact</p>
+      <h2 class="chapter-title" id="pv-contact">Questions</h2>
+    </div>
+    <div class="prose">
+      <p>Ask me at <a href="{{ site.twitterUrl }}" rel="noopener" target="_blank">@{{ site.twitter }}</a>.</p>
+    </div>
+  </section>
+</div>

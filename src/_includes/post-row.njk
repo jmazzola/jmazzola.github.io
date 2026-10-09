@@ -1,0 +1,19 @@
+{#- Expects `post` (a collection item) from the caller's loop. -#}
+{%- import "icons.njk" as icons -%}
+{%- set cat = site.categories[post.data.category] -%}
+<li class="post-row" data-category="{{ post.data.category }}">
+  <a class="post-link" href="{{ post.url }}">
+    <time class="post-date" datetime="{{ post.date | isoDate }}">{{ post.date | dateShort }}</time>
+    <div class="post-body">
+      <div class="post-meta-line">
+        <time class="post-date" datetime="{{ post.date | isoDate }}">{{ post.date | dateShort }}</time>
+        {%- if cat %}
+        <span class="cat cat-{{ post.data.category }}">{{ cat.name }}</span>
+        {%- endif %}
+      </div>
+      <h3 class="post-row-title">{{ post.data.title }}</h3>
+      <p class="post-excerpt">{{ post.data.description or (post.content | excerpt) }}</p>
+    </div>
+    <span class="post-go">{{ icons.svg("arrow-right", 20) }}</span>
+  </a>
+</li>

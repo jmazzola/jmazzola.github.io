@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Theme: Titanium
+   Colors from omp's built-in "titanium" theme: brushed-titanium surfaces,
+   electric-blue accent, titanium-gold strings, readout-green code.
+   Active when <html data-theme="titanium">.
+   ========================================================================== */
+
+:root[data-theme="titanium"] {
+  /* surfaces (omp: darkTitanium chrome, brushedTitanium background, widget, subtleGray) */
+  --bg: #0f1216;
+  --bg-raise: #151820;
+  --surface: #1c2029;
+  --surface-2: #2a3038;
+  --code-bg: #151820;
+
+  /* hairlines (omp: borderMuted, border) */
+  --line: rgba(156, 163, 176, 0.12);
+  --line-strong: #2a3038;
+
+  /* ink (omp: brightAluminum, muted, dim) */
+  --ink: #e8ecf4;
+  --ink-soft: #c3c9d3;
+  --ink-mute: #9ca3b0;
+  --ink-faint: #6b7280;
+
+  /* accent (omp: electricBlue / deepBlue) */
+  --accent: #00b4ff;
+  --accent-strong: #6ec9ff;
+  --accent-ink: #0f1216;
+  --accent-rgb: 0, 180, 255;
+  --glow-rgb: 212, 192, 144;  /* titaniumGold */
+
+  /* component surfaces */
+  --header-bg: rgba(15, 18, 22, 0.82);
+  --dump-bg: linear-gradient(180deg, #1c2029, #151820);
+  --dump-hex: #c3c9d3;
+  --code-ink: #c3c9d3;
+
+  /* category marks (omp: titaniumGold, electricBlue, readoutGreen, dimAluminum) */
+  --cat-vibe-coded: #d4c090;
+  --cat-re-with-ai: #00b4ff;
+  --cat-sans-ai: #00ff88;
+  --cat-thoughts: #9ca3b0;
+}
+
+/* hex dump hit and markdown roles, as omp renders them */
+:root[data-theme="titanium"] .dump-row.is-hot .dump-asc { color: #d4c090; }
+:root[data-theme="titanium"] .prose :not(pre) > code { color: #00ff88; }          /* mdCode */
+:root[data-theme="titanium"] .prose blockquote { color: #9ca3b0; border-left-color: #2a3038; } /* mdQuote */
+
+/* syntax tokens (omp: syntax*) */
+:root[data-theme="titanium"] .token.comment,
+:root[data-theme="titanium"] .token.prolog,
+:root[data-theme="titanium"] .token.doctype,
+:root[data-theme="titanium"] .token.cdata { color: #6b7280; }
+:root[data-theme="titanium"] .token.punctuation { color: #9ca3b0; }
+:root[data-theme="titanium"] .token.operator,
+:root[data-theme="titanium"] .token.entity,
+:root[data-theme="titanium"] .token.url { color: #00b4ff; }
+:root[data-theme="titanium"] .token.keyword,
+:root[data-theme="titanium"] .token.important,
+:root[data-theme="titanium"] .token.atrule,
+:root[data-theme="titanium"] .token.rule { color: #00b4ff; }
+:root[data-theme="titanium"] .token.function,
+:root[data-theme="titanium"] .token.function-variable { color: #00ff88; }
+:root[data-theme="titanium"] .token.class-name,
+:root[data-theme="titanium"] .token.builtin,
+:root[data-theme="titanium"] .token.type,
+:root[data-theme="titanium"] .token.namespace { color: #6ec9ff; }
+:root[data-theme="titanium"] .token.string,
+:root[data-theme="titanium"] .token.char,
+:root[data-theme="titanium"] .token.attr-value,
+:root[data-theme="titanium"] .token.regex,
+:root[data-theme="titanium"] .token.template-string { color: #d4c090; }
+:root[data-theme="titanium"] .token.number,
+:root[data-theme="titanium"] .token.boolean,
+:root[data-theme="titanium"] .token.constant,
+:root[data-theme="titanium"] .token.symbol { color: #ffb347; }
+:root[data-theme="titanium"] .token.variable,
+:root[data-theme="titanium"] .token.parameter,
+:root[data-theme="titanium"] .token.property,
+:root[data-theme="titanium"] .token.attr-name { color: #e8ecf4; }
+:root[data-theme="titanium"] .token.tag,
+:root[data-theme="titanium"] .token.selector { color: #00b4ff; }
+:root[data-theme="titanium"] .token.macro,
+:root[data-theme="titanium"] .token.directive,
+:root[data-theme="titanium"] .token.register { color: #d06fed; }  /* ansi magenta */
+:root[data-theme="titanium"] .token.deleted { color: #ff4757; }  /* toolDiffRemoved */
+:root[data-theme="titanium"] .token.inserted { color: #00ff88; } /* toolDiffAdded */

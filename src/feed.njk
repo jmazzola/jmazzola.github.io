@@ -1,0 +1,33 @@
+---
+permalink: /feed.xml
+layout: false
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ site.url }}/" xml:lang="{{ site.lang }}">
+  <title>{{ site.title | escape }}</title>
+  <subtitle>{{ site.description | escape }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="{{ site.url }}/" rel="alternate" type="text/html"/>
+  <id>{{ site.url }}/</id>
+  <updated>{% if collections.posts.length %}{{ collections.posts[0].date.toISOString() }}{% else %}{{ page.date.toISOString() }}{% endif %}</updated>
+  <author>
+    <name>{{ site.author | escape }}</name>
+    <uri>{{ site.url }}/</uri>
+  </author>
+  {%- for post in collections.posts %}
+  {%- set absoluteUrl = site.url + post.url %}
+  <entry>
+    <title>{{ post.data.title | escape }}</title>
+    <link href="{{ absoluteUrl }}" rel="alternate" type="text/html"/>
+    <id>{{ absoluteUrl }}</id>
+    <published>{{ post.date.toISOString() }}</published>
+    <updated>{{ post.date.toISOString() }}</updated>
+    {%- if post.data.category %}
+    <category term="{{ post.data.category | escape }}"/>
+    {%- endif %}
+    <summary type="html">{{ (post.data.description or (post.content | excerpt)) | escape }}</summary>
+    <content type="html">{{ post.content | escape }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

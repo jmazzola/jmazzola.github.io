@@ -1,0 +1,39 @@
+---
+permalink: /llms.txt
+layout: false
+eleventyExcludeFromCollections: true
+---
+{#- llms.txt (https://llmstxt.org): a Markdown index of the site for language models. -#}
+# {{ site.title }}
+
+> {{ site.description | safe }}
+
+{{ site.author }}: {{ site.tagline }}. Contact: [@{{ site.twitter }}]({{ site.twitterUrl }}).
+
+## Pages
+{% for url in ["/", "/about/", "/blog/"] %}
+{%- for entry in collections.all %}{% if entry.url == url %}
+- [{{ entry.data.title | safe }}]({{ site.url }}{{ entry.url }}): {{ entry.data.description | safe }}
+{%- endif %}{% endfor %}
+{%- endfor %}
+{%- for cat in site.categoryOrder %}
+{%- set catPosts = collections.posts | filterByCategory(cat) %}
+{%- if catPosts.length %}
+
+## {{ site.categories[cat].name }}
+
+{{ site.categories[cat].blurb | safe }}
+{% for post in catPosts %}
+- [{{ post.data.title | safe }}]({{ site.url }}{{ post.url }}): {{ post.date | isoDate }}. {{ post.data.description | safe }}
+{%- endfor %}
+{%- endif %}
+{%- endfor %}
+
+## Optional
+{% for url in ["/terms/", "/privacy/"] %}
+{%- for entry in collections.all %}{% if entry.url == url %}
+- [{{ entry.data.title | safe }}]({{ site.url }}{{ entry.url }}): {{ entry.data.description | safe }}
+{%- endif %}{% endfor %}
+{%- endfor %}
+- [Atom feed]({{ site.url }}/feed.xml): Full text of every post.
+- [Sitemap]({{ site.url }}/sitemap.xml): Every page URL.
