@@ -3,6 +3,11 @@ title: "most security is just tedium: my 2027 predictions"
 description: "a lot of what we call 'secure' is really just 'tedious'. my 2027 predictions on gold farming, emulation, bots, cheats, exploits, n-days, and RSA-1024 once models do the tedious part."
 date: 2026-10-09
 category: thoughts
+changes:
+  - date: 2026-10-10
+    note: "Defined sneakerbots for anyone who hasn't run into them."
+    before: "Sneakerbots get hit from a different angle. Bots already automate checkout."
+    after: "If you haven't run into them, sneakerbots are scripts that buy limited-release sneakers (and plenty of other hyped drops) the instant they go live, faster than any person can click through checkout, so the stock can be resold at a markup. They get hit from a different angle. Checkout is already automated."
 ---
 
 On September 7th, I posted [a thread of predictions for 2027](https://x.com/justmazz/status/2097087510857801955): RWT gold crashing, console exclusives emulated on PC before their PC release, Windows 10 [going the way of XP](https://www.tomshardware.com/software/windows/idle-windows-xp-and-2000-machines-get-infected-with-viruses-within-minutes-of-being-exposed-online), RSA-1024 falling over. It didn't get any replies, which - fair, a list of predictions with no reasoning doesn't give anyone much to reply to, so let's make a blog post to explain the method to the madness!
@@ -37,7 +42,7 @@ Real world trading, albeit a looked-down-upon practice, is a major market and on
 
 Now, models remove that tradeoff completely. A bot that varies its routes, takes breaks, answers a player who talks to it, and adjusts its actions after a ban wave used to be a serious engineering project. Now using a [decent model](https://arxiv.org/abs/2601.02427); especially with [computer use](https://arxiv.org/abs/2403.03186)? It's a weekend project. Producing gold has never been cheaper, and detection is getting worse at the same time, so naturally, the supply goes up and the price comes down.
 
-Sneakerbots get hit from a different angle. Bots already automate checkout. What separated the good ones from the rest was keeping up with retailer defenses: obfuscated JavaScript challenges, device fingerprinting, and request signing. That's just reverse engineering grind, exactly the kind of work models are really good at **speeding up**. Once every bot works on release day, owning one stops being an advantage, resale margins shrink, and retailers lean harder on raffles, identity checks, and member-only drops rendering these bots far less useful than previously.
+If you haven't run into them, sneakerbots are scripts that buy limited-release sneakers (and plenty of other hyped drops) the instant they go live, faster than any person can click through checkout, so the stock can be resold at a markup. They get hit from a different angle. Checkout is already automated. What separated the good ones from the rest was keeping up with retailer defenses: obfuscated JavaScript challenges, device fingerprinting, and request signing. That's just reverse engineering grind, exactly the kind of work models are really good at **speeding up**. Once every bot works on release day, owning one stops being an advantage, resale margins shrink, and retailers lean harder on raffles, identity checks, and member-only drops rendering these bots far less useful than previously.
 
 I'd bet on gold prices falling. Whether that looks like a crash or a slow slide I'm less sure about, and as such I feel about the same on sneakerbots. The way this goes wrong is if the bottleneck moves from bot quality to account creation. If phone verification, payment binding, or hardware attestation makes every fresh account expensive, supply stays capped no matter how good the bots get, and the whole thing turns into the identity problem I get to further down in the article.
 
