@@ -6,6 +6,7 @@ layout: base.njk
 {%- set newer = collections.posts | getPreviousCollectionItem(page) -%}
 {%- set older = collections.posts | getNextCollectionItem(page) -%}
 {%- set toc = content | toc -%}
+{%- set changeLog = changes | renderChanges(page.rawInput, toc, page.inputPath) -%}
 <article class="post">
   <header class="post-header">
     <div class="shell">
@@ -22,6 +23,9 @@ layout: base.njk
           <div><dt class="visually-hidden">Published</dt><dd><time datetime="{{ page.date | isoDate }}">{{ page.date | dateFormat }}</time></dd></div>
           <div><dt class="visually-hidden">Length</dt><dd>{{ content | readingTime }}</dd></div>
           <div><dt class="visually-hidden">Author</dt><dd><a href="/about/">{{ site.author }}</a></dd></div>
+          {%- if changeLog | length %}
+          <div><dt class="visually-hidden">Updated</dt><dd><a href="#changes">Updated <time datetime="{{ changeLog[0].date | isoDate }}">{{ changeLog[0].date | dateFormat }}</time></a></dd></div>
+          {%- endif %}
         </dl>
       </div>
     </div>
@@ -32,6 +36,30 @@ layout: base.njk
       <div class="prose">
         {{ content | safe }}
       </div>
+
+      {%- if changeLog | length %}
+      <section class="post-changes prose" id="changes" aria-labelledby="changes-label">
+        <p class="section-label" id="changes-label"><span class="mark" aria-hidden="true"></span>Changes since publishing</p>
+        <ol class="change-list" role="list">
+          {%- for change in changeLog %}
+          <li>
+            <details class="code-block change">
+              <summary class="code-head"><span class="code-lang"><time datetime="{{ change.date | isoDate }}">{{ change.date | dateFormat }}</time></span><span class="code-toggle" data-lines="diff" aria-hidden="true"></span></summary>
+              <div class="change-body">
+                {%- if change.note %}
+                <p class="change-msg">{{ change.note }}</p>
+                {%- endif %}
+                <div class="change-diff">
+                  {%- if change.section %}<a class="diff-hunk" href="#{{ change.section.id }}"><span aria-hidden="true">@@ </span>{{ change.section.text | safe }}<span aria-hidden="true"> @@</span></a>{% endif -%}
+                  {{ change.html | safe }}
+                </div>
+              </div>
+            </details>
+          </li>
+          {%- endfor %}
+        </ol>
+      </section>
+      {%- endif %}
 
       <footer class="post-footer">
         <div class="signoff">

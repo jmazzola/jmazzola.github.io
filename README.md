@@ -22,6 +22,20 @@ npm run dev    # http://localhost:8080 with live reload
 npm run build  # writes the site to _site/
 ```
 
+## Changes after publishing
+
+Edits to a published post can be listed on it, errata-style. Add entries to the post's front matter:
+
+```yaml
+changes:
+  - date: 2026-10-10
+    note: "Defined sneakerbots for anyone who hasn't run into them."
+    before: "Sneakerbots get hit from a different angle."
+    after: "If you haven't run into them, sneakerbots are … They get hit from a different angle."
+```
+
+Leave out `before` for an addition or `after` for a removal; `note` is optional. The post shows the entries newest first under "Changes since publishing" as word diffs of the Markdown, adds an "Updated" link with the newest date to its header, and links each entry to the section its `after` text is in (`lib/changes.js`). The section link only works if `after` is copied exactly from the post's Markdown.
+
 ## Using what's here
 
 The writing and my own screenshots are mine. Third-party screenshots, clips, and GIFs belong to their owners and are credited where they're used. The [terms page](https://jmazzola.github.io/terms/) covers how you can use and quote things. Fonts are self-hosted under the SIL Open Font License.

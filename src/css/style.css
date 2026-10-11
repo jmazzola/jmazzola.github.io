@@ -1513,6 +1513,35 @@ html.lightbox-open { overflow: hidden; }
 .signoff-bio { color: var(--ink-soft); max-width: 56ch; margin-bottom: 0.4rem; }
 .signoff .text-link { min-height: 44px; }
 
+/* changes since publishing: one folded diff per entry, styled like a code block */
+.post-changes { margin-top: clamp(3rem, 7vw, 4.5rem); }
+.post-changes .change-list { display: grid; gap: 0.75rem; padding: 0; list-style: none; }
+.post-changes .change-list > li { margin: 0; }
+.post-changes .code-block { margin-block: 0; }
+.change-body { padding: 0.75rem 1.25rem 1.25rem; }
+.post-changes .change-msg { font-family: var(--font-mono); font-size: var(--step--1); line-height: 1.6; color: var(--ink); }
+.post-changes .change-diff {
+  font-family: var(--font-code);
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: var(--code-ink);
+  overflow-wrap: anywhere;
+}
+.post-changes .change-msg + .change-diff { margin-top: 0.85rem; }
+/* the hunk header names the section the change is in and links to it */
+.post-changes .diff-hunk { display: block; width: fit-content; margin-bottom: 0.2rem; color: var(--ink-mute); }
+.diff-line { display: grid; grid-template-columns: 2ch minmax(0, 1fr); }
+.diff-sign { user-select: none; }
+.diff-mod .diff-sign { color: var(--ink-faint); }
+.change-diff :is(ins, del) { padding-inline: 0.1em; border-radius: 3px; background: color-mix(in srgb, currentColor 16%, transparent); }
+.change-diff ins { text-decoration: none; }
+.change-diff del { text-decoration: line-through; text-decoration-thickness: 1px; }
+.change-diff del + ins { margin-left: 0.25em; }
+@media (max-width: 559.98px) {
+  .change-body { padding-inline: var(--gutter); }
+  .post-changes .change-diff { font-size: 0.8rem; }
+}
+
 .pager { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 @media (min-width: 640px) { .pager { grid-template-columns: 1fr 1fr; } }
 .pager-link {

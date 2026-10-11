@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const renderChanges = require("./lib/changes");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
@@ -146,6 +147,10 @@ module.exports = function(eleventyConfig) {
     }
     return items;
   });
+
+  // A post's `changes` front matter (edits made after publishing), newest first,
+  // each rendered as a word diff of the Markdown (see lib/changes.js).
+  eleventyConfig.addFilter("renderChanges", renderChanges);
 
   // Social card for a page: src/img/og/<fileSlug>.png when one exists (posts get
   // a title card), otherwise the site card. 1200x630, used by X, Discord, Telegram.
