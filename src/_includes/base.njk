@@ -81,7 +81,7 @@
     "jobTitle": "{{ site.jobTitle }}",
     "description": "Ex-cheat dev turned senior security engineer, specializing in reverse engineering, anti-cheat, and anti-piracy.",
     "url": "{{ site.url }}/about/",
-    "sameAs": ["{{ site.twitterUrl }}"],
+    "sameAs": ["{{ site.twitterUrl }}", "{{ site.githubUrl }}"],
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "Full Sail University" },
     "knowsAbout": ["Reverse engineering", "Anti-cheat", "Anti-piracy", "DRM", "LLVM", "Windows internals", "Kernel drivers", "x86", "PowerPC"]
   }
@@ -122,7 +122,6 @@
             <li><a class="nav-link" href="/about/"{% if section == "about" %} aria-current="page"{% endif %}><span class="nav-index" aria-hidden="true">01</span>About</a></li>
             <li><a class="nav-link" href="/blog/"{% if section == "blog" %} aria-current="{{ 'page' if page.url == '/blog/' else 'true' }}"{% endif %}><span class="nav-index" aria-hidden="true">02</span>Blog</a></li>
           </ul>
-          <a class="nav-social" href="{{ site.twitterUrl }}" rel="me noopener" target="_blank">{{ icons.xlogo(15) }}<span>@{{ site.twitter }}</span></a>
           <div class="theme-picker" role="group" aria-label="Color theme" data-theme-picker data-themes="{{ site.themes | dump | forceescape }}">
             {#- hidden themes render last ("1337" is an integer-like key, so JS puts it first) and stay hidden until unlocked -#}
             {%- for pass in [false, true] %}
@@ -155,6 +154,7 @@
             <li><a href="/blog/">Blog</a></li>
             <li><a href="/feed.xml">{{ icons.svg("rss", 14) }}RSS</a></li>
             <li><a href="{{ site.twitterUrl }}" rel="me noopener" target="_blank">{{ icons.xlogo(13) }}@{{ site.twitter }}</a></li>
+            <li><a href="{{ site.githubUrl }}" rel="me noopener" target="_blank">{{ icons.github(13) }}GitHub</a></li>
             <li><a href="{{ site.linkedinUrl }}" rel="me noopener" target="_blank">{{ icons.linkedin(13) }}LinkedIn</a></li>
           </ul>
         </nav>

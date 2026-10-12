@@ -357,19 +357,6 @@ a.cat:hover { color: var(--ink); }
   height: 1px;
   background: var(--accent);
 }
-.nav-social {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 44px;
-  padding-left: 1.5rem;
-  border-left: 1px solid var(--line);
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  color: var(--ink-mute);
-  transition: color var(--dur) var(--ease-out);
-}
-.nav-social:hover { color: var(--accent); }
 
 /* ---------- theme picker ---------- */
 .theme-picker {
@@ -504,14 +491,12 @@ a.cat:hover { color: var(--ink); }
   .js .nav-link:hover { background: transparent; }
   .js .nav-link[aria-current]::after { display: none; }
   .js .nav-link[aria-current] { color: var(--accent); }
-  .js .nav-social { padding: 0.5rem 0 0.25rem; border-left: 0; min-height: 56px; }
-  .js .theme-picker { flex-wrap: wrap; gap: 0.5rem; padding: 0.25rem 0 1.25rem; border-left: 0; }
+  .js .theme-picker { flex-wrap: wrap; gap: 0.5rem; padding: 1rem 0 1.25rem; border-left: 0; }
   .js .theme-option { min-height: 44px; padding: 0 0.9rem; border-color: var(--line-strong); }
   .js .theme-option[aria-pressed="true"] { border-color: var(--accent-line); }
 
   /* no JS: keep everything reachable, just compact */
   .no-js .header-inner { flex-wrap: wrap; padding-block: 0.5rem; }
-  .no-js .nav-social { display: none; }
   .no-js .nav-link { padding: 0 0.6rem; }
 }
 
@@ -1681,11 +1666,17 @@ html.lightbox-open { overflow: hidden; }
   background: linear-gradient(180deg, transparent, rgba(var(--accent-rgb), 0.025));
   overflow: hidden;
 }
+/* Flex, not grid: the links stay on one line, beside the wordmark when they
+   fit and on their own line under it when they don't. */
 .footer-top {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: 2rem;
   padding-top: clamp(2.5rem, 6vw, 4rem);
 }
+.footer-sign { flex: 1 1 0; } /* never narrower than the wordmark; the quip wraps */
 .footer-mark {
   font-family: var(--font-mono);
   font-size: clamp(3rem, 15vw, 9.5rem);
@@ -1705,7 +1696,12 @@ html.lightbox-open { overflow: hidden; }
   color: var(--ink-mute);
 }
 .footer-quip::before { content: "// "; color: var(--accent); opacity: 0.7; }
-.footer-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; padding: 0; list-style: none; }
+.footer-nav ul { display: flex; gap: 0.25rem 1.5rem; padding: 0; list-style: none; }
+/* phones: too narrow for one line, so wrap under the wordmark at full width */
+@media (max-width: 559.98px) {
+  .footer-nav { flex-basis: 100%; }
+  .footer-nav ul { flex-wrap: wrap; }
+}
 .footer-nav a {
   display: inline-flex;
   align-items: center;
@@ -1733,9 +1729,6 @@ html.lightbox-open { overflow: hidden; }
 .footer-legal a:hover { color: var(--accent); }
 .footer-bottom > p:first-child a { text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 .footer-bottom > p:first-child a:hover { color: var(--accent); text-decoration-color: var(--accent); }
-@media (min-width: 860px) {
-  .footer-top { grid-template-columns: 1fr auto; align-items: end; }
-}
 
 /* ---------- motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {

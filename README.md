@@ -42,4 +42,4 @@ The writing and my own screenshots are mine. Third-party screenshots, clips, and
 
 ## Contact
 
-[@justmazz](https://x.com/justmazz) on X.
+[@justmazz](https://x.com/justmazz) on X or on [GitHub](https://github.com/jmazzola).
