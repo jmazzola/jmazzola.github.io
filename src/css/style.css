@@ -499,6 +499,12 @@ a.cat:hover { color: var(--ink); }
   .no-js .header-inner { flex-wrap: wrap; padding-block: 0.5rem; }
   .no-js .nav-link { padding: 0 0.6rem; }
 }
+/* phones: the labeled swatches don't fit on one line, so two even columns instead of a ragged wrap */
+@media (max-width: 559.98px) {
+  .js .theme-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* an odd one out (1337, once it's unlocked) gets the last row to itself */
+  .js .theme-option:nth-child(odd of :not([hidden])):nth-last-child(1 of :not([hidden])) { grid-column: 1 / -1; }
+}
 
 /* ---------- page heads ---------- */
 .page-head {
@@ -1421,16 +1427,19 @@ html.lightbox-open { overflow: hidden; }
 .post-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0;
+  gap: 0.35rem 2rem;
   margin-top: 1.75rem;
   font-family: var(--font-mono);
   font-size: var(--step--1);
   color: var(--ink-mute);
   font-variant-numeric: tabular-nums;
+  /* the first item on a wrapped line hangs its "/" past the left edge: clip it there, leaving room for focus rings */
+  clip-path: inset(-1rem -1rem -1rem -0.5rem);
 }
-.post-meta > div { display: flex; align-items: center; }
+.post-meta > div { position: relative; }
 .post-meta dd { margin: 0; }
-.post-meta > div + div::before { content: "/"; margin-inline: 0.75rem; color: var(--ink-faint); }
+/* separators sit in the column gap, just outside the item they introduce */
+.post-meta > div + div::before { content: "/"; position: absolute; top: 0; right: 100%; width: 2rem; text-align: center; color: var(--ink-faint); }
 .post-meta a:hover { color: var(--accent); }
 
 /* article column under the wordmark; the contents rail takes the right side */
