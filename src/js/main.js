@@ -449,21 +449,31 @@
     var bar = dialog.querySelector(".lightbox-bar");
     var zoomLabel = dialog.querySelector(".lightbox-zoom");
 
-    var source = null, closing = false;
+    var source = null, closing = false, isSVG = false;
     var scale = 1, tx = 0, ty = 0, fitW = 0, fitH = 0;
     var pointers = new Map(), pinchDist = 0, dragged = false;
 
     function apply() {
-      view.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
+      if (isSVG) {
+        // Re-rasterize the vector at the zoomed size so it stays sharp; cap the raster and let transform cover any zoom past it.
+        var w = fitW * scale, h = fitH * scale, cap = 4800, f = w > cap ? cap / w : 1;
+        view.style.width = Math.round(w * f) + "px";
+        view.style.height = Math.round(h * f) + "px";
+        view.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + (1 / f) + ")";
+      } else {
+        view.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
+      }
       zoomLabel.textContent = Math.round(scale * 100) + "%";
       view.classList.toggle("is-zoomed", scale > 1);
     }
 
-    // Fit the image inside the viewport (never past 1.5x its natural size), leaving room for the bar.
+    // Fit the image inside the viewport, leaving room for the bar.
     function size() {
-      var nw = source.naturalWidth || source.clientWidth;
-      var nh = source.naturalHeight || source.clientHeight;
-      var k = Math.min((window.innerWidth * 0.94) / nw, (window.innerHeight * 0.84) / nh, 1.5);
+      // SVG natural size is unreliable (viewBox, no width/height), so take the aspect from the on-page
+      // render; vectors fill the viewport, rasters stop at 1.5x so they never upscale into blur.
+      var nw = isSVG ? source.clientWidth : (source.naturalWidth || source.clientWidth);
+      var nh = isSVG ? source.clientHeight : (source.naturalHeight || source.clientHeight);
+      var k = Math.min((window.innerWidth * 0.94) / nw, (window.innerHeight * 0.84) / nh, isSVG ? Infinity : 1.5);
       fitW = Math.round(nw * k);
       fitH = Math.round(nh * k);
       view.style.width = fitW + "px";
@@ -505,6 +515,7 @@
       closing = false;
       view.src = img.currentSrc || img.src;
       view.alt = img.alt;
+      isSVG = /\.svgz?($|[?#])/i.test(view.src);
       scale = 1;
       tx = ty = 0;
       size();
@@ -522,6 +533,7 @@
     function close() {
       if (closing || !dialog.open) return;
       closing = true;
+      if (isSVG && scale !== 1) { scale = 1; tx = ty = 0; apply(); } // morph back from the fitted size, not the zoomed one
       var anims = [];
       function done() {
         anims.forEach(function (a) { a.cancel(); });
