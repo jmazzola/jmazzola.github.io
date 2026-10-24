@@ -30,7 +30,10 @@ module.exports = function(eleventyConfig) {
       const open = flags.includes("collapsed") ? "" : " open";
       return `<details class="code-block"${open}>` +
         `<summary class="code-head"><span class="code-lang">${label}<span class="visually-hidden"> code</span></span>` +
-        `<span class="code-toggle" data-lines="${lines} ${lines === 1 ? "line" : "lines"}" aria-hidden="true"></span></summary>` +
+        `<span class="code-head-actions">` +
+        `<span class="code-wrap" role="button" tabindex="0" aria-label="Toggle word wrap">wrap</span>` +
+        `<span class="code-toggle" data-lines="${lines} ${lines === 1 ? "line" : "lines"}" aria-hidden="true"></span>` +
+        `</span></summary>` +
         renderFence(tokens, idx, options, env, self) +
         `</details>\n`;
     };
@@ -41,6 +44,17 @@ module.exports = function(eleventyConfig) {
       `<div class="table-wrap">\n` + self.renderToken(tokens, idx, options);
     md.renderer.rules.table_close = (tokens, idx, options, env, self) =>
       self.renderToken(tokens, idx, options) + `</div>\n`;
+
+    // Markdown column alignment (|---:|) is dropped so every table reads
+    // left-aligned; a right-aligned numeric column otherwise floats its cells
+    // toward the centre, which looks off.
+    const stripAlign = (tokens, idx, options, env, self) => {
+      const t = tokens[idx];
+      if (t.attrs) t.attrs = t.attrs.filter(([k]) => k !== "style");
+      return self.renderToken(tokens, idx, options);
+    };
+    md.renderer.rules.th_open = stripAlign;
+    md.renderer.rules.td_open = stripAlign;
 
     // h2/h3 get ids so the contents rail (and anyone sharing a link) can point
     // at a section. Ids are unique per document: a repeated heading gets -2, -3.
@@ -59,6 +73,32 @@ module.exports = function(eleventyConfig) {
       }
       return self.renderToken(tokens, idx, options);
     };
+
+    // Spoiler: >!text!< becomes a click-to-reveal <button class="spoiler">. CSS
+    // blurs it until revealed; without JS it just reads normally. Inner markdown
+    // (including `code`) still renders, so a flag is >!`flag@flare-on.com`!<.
+    md.inline.ruler.before("emphasis", "spoiler", (state, silent) => {
+      const start = state.pos;
+      if (state.src.charCodeAt(start) !== 0x3E || state.src.charCodeAt(start + 1) !== 0x21) return false; // >!
+      let close = -1;
+      for (let pos = start + 2; pos < state.posMax - 1; pos++) {
+        if (state.src.charCodeAt(pos) === 0x21 && state.src.charCodeAt(pos + 1) === 0x3C) { close = pos; break; } // !<
+      }
+      if (close < 0) return false;
+      if (silent) return true;
+      const open = state.push("spoiler_open", "button", 1);
+      open.attrSet("type", "button");
+      open.attrSet("class", "spoiler");
+      open.attrSet("aria-label", "Reveal hidden text");
+      const oldMax = state.posMax;
+      state.pos = start + 2;
+      state.posMax = close;
+      state.md.inline.tokenize(state);
+      state.posMax = oldMax;
+      state.pos = close + 2;
+      state.push("spoiler_close", "button", -1);
+      return true;
+    });
   });
 
   // src/posts is also the Obsidian vault: drafts/ holds unpublished posts and
@@ -101,6 +141,14 @@ module.exports = function(eleventyConfig) {
     return [...cats].sort();
   });
 
+  // The nine FLARE-On 13 write-up pages, a series under /blog/flare-on-13-writeups/.
+  // They live outside src/posts/ so they stay out of the blog index and feed, but
+  // still get sitemapped and get prev/next nav via this ordered collection.
+  eleventyConfig.addCollection("flareOn13", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/flare-on-13-writeups/*.md")
+      .sort((a, b) => a.data.challenge - b.data.challenge);
+  });
+
   // Front matter dates are parsed as UTC midnight; format in UTC so a post
   // dated 2026-10-01 never renders as September 30 in western time zones.
   eleventyConfig.addFilter("dateFormat", function(date) {
@@ -132,9 +180,12 @@ module.exports = function(eleventyConfig) {
     return stripped.substring(0, 200) + (stripped.length > 200 ? '...' : '');
   });
 
+  // Reading time estimates prose, not reference material: skip <pre> code blocks
+  // (a post full of folded-away disassembly shouldn't read as hours).
   eleventyConfig.addFilter("readingTime", function(content) {
     if (!content) return '1 min read';
-    const words = content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+    const prose = String(content).replace(/<pre[\s\S]*?<\/pre>/gi, ' ');
+    const words = prose.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
     return `${Math.max(1, Math.round(words / 220))} min read`;
   });
 

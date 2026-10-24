@@ -3,6 +3,7 @@ layout: base.njk
 ---
 {%- import "icons.njk" as icons -%}
 {%- set cat = site.categories[category] -%}
+{%- set hubAnchor = ("/blog/flare-on-13-writeups/#challenge-" ~ challenge ~ "-" ~ (challengeName | slugify)) if challenge else "/blog/flare-on-13-writeups/" -%}
 {%- set newer = collections.posts | getPreviousCollectionItem(page) -%}
 {%- set older = collections.posts | getNextCollectionItem(page) -%}
 {%- set toc = content | toc -%}
@@ -11,7 +12,11 @@ layout: base.njk
   <header class="post-header">
     <div class="shell">
       <div class="post-head">
+        {%- if challenge %}
+        <a class="back-link" href="{{ hubAnchor }}">{{ icons.svg("arrow-left", 16) }}FLARE-On 13 write-ups</a>
+        {%- else %}
         <a class="back-link" href="/blog/">{{ icons.svg("arrow-left", 16) }}All posts</a>
+        {%- endif %}
         <p class="kicker">
           <a class="cat cat-{{ category }}" href="/blog/?category={{ category }}">{{ cat.name }}</a>
         </p>
@@ -22,7 +27,7 @@ layout: base.njk
         <dl class="post-meta">
           <div><dt class="visually-hidden">Published</dt><dd><time datetime="{{ page.date | isoDate }}">{{ page.date | dateFormat }}</time></dd></div>
           <div><dt class="visually-hidden">Length</dt><dd>{{ content | readingTime }}</dd></div>
-          <div><dt class="visually-hidden">Author</dt><dd><a href="/about/">{{ site.author }}</a></dd></div>
+          <div><dt class="visually-hidden">Author</dt><dd>{% if authorUrl %}<a href="{{ authorUrl }}">{{ author or site.author }}</a>{% else %}<a href="/about/">{{ author or site.author }}</a>{% endif %}</dd></div>
           {%- if changeLog | length %}
           <div><dt class="visually-hidden">Updated</dt><dd><a href="#changes">Updated <time datetime="{{ changeLog[0].date | isoDate }}">{{ changeLog[0].date | dateFormat }}</time></a></dd></div>
           {%- endif %}
@@ -50,8 +55,13 @@ layout: base.njk
                 <p class="change-msg">{{ change.note }}</p>
                 {%- endif %}
                 <div class="change-diff">
-                  {%- if change.section %}<a class="diff-hunk" href="#{{ change.section.id }}"><span aria-hidden="true">@@ </span>{{ change.section.text | safe }}<span aria-hidden="true"> @@</span></a>{% endif -%}
-                  {{ change.html | safe }}
+                  {%- for hunk in change.hunks %}
+                  <div class="diff-chunk">
+                    {%- if hunk.section %}<a class="diff-hunk" href="#{{ hunk.section.id }}"><span aria-hidden="true">@@ </span>{{ hunk.section.text | safe }}<span aria-hidden="true"> @@</span></a>{% elif change.hunks | length > 1 %}<span class="diff-hunk"><span aria-hidden="true">@@ </span>front matter<span aria-hidden="true"> @@</span></span>{% endif -%}
+                    {%- if hunk.note %}<p class="diff-note"><span aria-hidden="true"># </span>{{ hunk.note }}</p>{% endif -%}
+                    {{ hunk.html | safe }}
+                  </div>
+                  {%- endfor %}
                 </div>
               </div>
             </details>
@@ -64,8 +74,8 @@ layout: base.njk
       <footer class="post-footer">
         <div class="signoff">
           <p class="signoff-label">Written by</p>
-          <p class="signoff-name"><a href="/about/">{{ site.author }}</a></p>
-          <p class="signoff-bio">Ex-cheat dev turned security engineer. 15+ years taking software apart, the last decade or so on the defending side.</p>
+          <p class="signoff-name">{% if authorUrl %}<a href="{{ authorUrl }}">{{ author or site.author }}</a>{% else %}<a href="/about/">{{ author or site.author }}</a>{% endif %}</p>
+          <p class="signoff-bio">{{ authorBio or "Ex-cheat dev turned security engineer. 15+ years taking software apart, the last decade or so on the defending side." }}</p>
           <a class="text-link" href="https://x.com/intent/post?text={{ (title ~ ' by @' ~ site.twitter) | urlencode }}&amp;url={{ (site.url ~ page.url) | urlencode }}" target="_blank" rel="noopener">{{ icons.xlogo(13) }}Discuss on X</a>
         </div>
 
@@ -81,6 +91,36 @@ layout: base.njk
           <a class="pager-link pager-newer" href="{{ newer.url }}">
             <span class="pager-dir">Newer{{ icons.svg("arrow-right", 14) }}</span>
             <span class="pager-title">{{ newer.data.title }}</span>
+          </a>
+          {%- endif %}
+        </nav>
+        {%- endif %}
+
+        {%- if challenge %}
+        {%- set prevCh = collections.flareOn13 | getPreviousCollectionItem(page) %}
+        {%- set nextCh = collections.flareOn13 | getNextCollectionItem(page) %}
+        <a class="back-link" href="{{ hubAnchor }}">{{ icons.svg("arrow-left", 16) }}FLARE-On 13 write-ups</a>
+        <nav class="pager" aria-label="Write-up series">
+          {%- if prevCh %}
+          <a class="pager-link pager-older" href="{{ prevCh.url }}">
+            <span class="pager-dir">{{ icons.svg("arrow-left", 14) }}Previous</span>
+            <span class="pager-title">{{ prevCh.data.challengeName or prevCh.data.title }}</span>
+          </a>
+          {%- else %}
+          <a class="pager-link pager-older" href="{{ hubAnchor }}">
+            <span class="pager-dir">{{ icons.svg("arrow-left", 14) }}All nine</span>
+            <span class="pager-title">FLARE-On 13 write-ups</span>
+          </a>
+          {%- endif %}
+          {%- if nextCh %}
+          <a class="pager-link pager-newer" href="{{ nextCh.url }}">
+            <span class="pager-dir">Next{{ icons.svg("arrow-right", 14) }}</span>
+            <span class="pager-title">{{ nextCh.data.challengeName or nextCh.data.title }}</span>
+          </a>
+          {%- else %}
+          <a class="pager-link pager-newer" href="{{ hubAnchor }}">
+            <span class="pager-dir">All nine{{ icons.svg("arrow-right", 14) }}</span>
+            <span class="pager-title">Back to the index</span>
           </a>
           {%- endif %}
         </nav>

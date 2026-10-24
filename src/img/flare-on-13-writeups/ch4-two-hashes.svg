@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="790" viewBox="0 0 1120 790" role="img" aria-labelledby="title desc">
+  <title id="title">Reconstruction of ToxicMiner's two digest jobs and two compression blocks</title>
+  <desc id="desc">A nonce-dependent digest gates the username. A separate digest with nonce 0x0B501E7E supplies sixteen RC4 key bytes. Each digest uses two thirty-two-round custom compression blocks. Native comparison vectors are shown for serial 0x5CD25509.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0L10 4L0 8Z" fill="#526079"/></marker></defs>
+  <rect width="1120" height="790" fill="#f5f7fb"/>
+  <g font-family="Segoe UI,Arial,sans-serif" fill="#18253b">
+    <text x="30" y="40" font-size="25" font-weight="700">Two digest jobs, two different nonces</text>
+    <text x="30" y="68" font-size="15">ToxicMiner.exe · image base 0x140000000</text>
+    <rect x="30" y="95" width="270" height="140" rx="10" fill="#e2edf9" stroke="#7c9bbf"/>
+    <text x="48" y="123" font-size="18" font-weight="700">Input words</text>
+    <text x="48" y="151" font-size="16">32-bit volume serial</text>
+    <text x="48" y="178" font-size="16">32-bit nonce</text>
+    <text x="48" y="212" font-size="13">Scanner RVA 0x134F70</text>
+    <path d="M300 165H349" stroke="#526079" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="360" y="95" width="370" height="140" rx="10" fill="#e9e4f9" stroke="#9380b6"/>
+    <text x="380" y="123" font-size="18" font-weight="700">Custom double hash H(serial, nonce)</text>
+    <text x="380" y="152" font-size="16">SHA IV → 32 rounds + poison</text>
+    <text x="380" y="180" font-size="16">SHA IV → 32 rounds + poison</text>
+    <text x="380" y="212" font-size="13">Helper RVA 0x134CA0 · compressor 0x135240</text>
+    <path d="M730 165H779" stroke="#526079" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="790" y="95" width="300" height="140" rx="10" fill="#dff1eb" stroke="#73a592"/>
+    <text x="810" y="123" font-size="18" font-weight="700">Digest bytes</text>
+    <text x="810" y="152" font-size="16">8 state words → 32 LE bytes</text>
+    <text x="810" y="180" font-size="16">Use depends on the caller</text>
+    <text x="810" y="212" font-size="13">Not a standard SHA-256 digest</text>
+    <rect x="30" y="265" width="1060" height="160" rx="10" fill="white" stroke="#b7c3d4"/>
+    <text x="48" y="295" font-size="18" font-weight="700">Separate uses in the scanner</text>
+    <text x="48" y="329" font-size="16">Gate</text>
+    <text x="160" y="329" font-size="16">H(serial, candidate nonce)</text>
+    <text x="580" y="329" font-size="16">Compare all 32 bytes with the parsed hex username</text>
+    <text x="48" y="364" font-size="16">Decrypt</text>
+    <text x="160" y="364" font-size="16">H(serial, 0x0B501E7E)</text>
+    <text x="580" y="364" font-size="16">First 16 bytes → RC4 → 51 ciphertext bytes</text>
+    <text x="48" y="399" font-size="13">Compare RVA 0x135139 - 0x13515D; fixed nonce/key/decrypt RVA 0x1351BE - 0x1351FB.</text>
+    <text x="30" y="461" font-size="19" font-weight="700">Inside either H call: padded words and a native comparison vector</text>
+    <rect x="30" y="480" width="492" height="205" rx="10" fill="white" stroke="#9380b6"/>
+    <text x="48" y="510" font-size="18" font-weight="700">Compression block 1</text>
+    <text x="48" y="540" font-size="15">[serial, nonce, 0x80000000, zeroes …, 64]</text>
+    <text x="48" y="565" font-size="15">32 rounds; feed-forward; state[0] XOR poison</text>
+    <text x="48" y="597" font-size="14">Serial 0x5CD25509, nonce 0x0B501E7E:</text>
+    <text x="48" y="623" font-family="Consolas,monospace" font-size="14">caa8b29630a59abfd9b505b056743dae</text>
+    <text x="48" y="645" font-family="Consolas,monospace" font-size="14">ad91bd0e275757694c826670a3cccee0</text>
+    <text x="48" y="671" font-size="12">Bytes in memory, not displayed big-endian SHA words</text>
+    <path d="M522 580H579" stroke="#526079" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="590" y="480" width="500" height="205" rx="10" fill="white" stroke="#9380b6"/>
+    <text x="608" y="510" font-size="18" font-weight="700">Compression block 2</text>
+    <text x="608" y="540" font-size="15">[first state's 8 words, 0x80000000, zeroes …, 256]</text>
+    <text x="608" y="565" font-size="15">Fresh SHA IV; another 32 rounds + poison</text>
+    <text x="608" y="597" font-size="14">Same native input, final digest:</text>
+    <text x="608" y="623" font-family="Consolas,monospace" font-size="14">66e9f5d07e6840d75b217b9be72aaae3</text>
+    <text x="608" y="645" font-family="Consolas,monospace" font-size="14">a3863d43705f8a17b7fb8190dc0fbb6d</text>
+    <text x="608" y="671" font-size="12">First 16 bytes are the RC4 key for this serial</text>
+    <text x="30" y="720" font-size="13">Helper RVA 0x134CA0 - 0x134D55; poison RVA 0x136230 - 0x136264.</text>
+    <text x="30" y="743" font-size="13">Each block starts from the SHA-256 IV, then applies the altered rounds and final XOR.</text>
+    <text x="30" y="768" font-size="13">The second block hashes the first block's eight state words. Both use 32 rounds.</text>
+  </g>
+</svg>

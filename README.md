@@ -34,7 +34,7 @@ changes:
     after: "If you haven't run into them, sneakerbots are … They get hit from a different angle."
 ```
 
-Leave out `before` for an addition or `after` for a removal; `note` is optional. The post shows the entries newest first under "Changes since publishing" as word diffs of the Markdown, adds an "Updated" link with the newest date to its header, and links each entry to the section its `after` text is in (`lib/changes.js`). The section link only works if `after` is copied exactly from the post's Markdown.
+Leave out `before` for an addition or `after` for a removal; `note` is optional. The post shows the entries under "Changes since publishing" as word diffs of the Markdown, newest day first. Entries from the same day form one panel, like a single commit: the day's first note is its message, and each entry is a hunk in the order it appears in the post, labeled with its own note and linked to the section its `after` text is in (`lib/changes.js`). The post's header also gets an "Updated" link with the newest date. The section link only works if `after` is copied exactly from the post's Markdown.
 
 ## Using what's here
 

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="t d">
+<title id="t">crux Pratt certificate and flag decryption</title>
+<desc id="d">Root 256-bit prime has eight child certificates: five copies of 2, 1777, 117013415621 and a 62-digit prime. The root witness is 3. The encoded certificate is 3891 bytes; first AES-CBC ciphertext is 3904 bytes and base64 input 5208 characters. The checker decrypts and verifies the certificate, then uses SHA-256 of its unpadded bytes as the second AES key. Decrypting the 64-byte flag ciphertext with that key and the same IV, then removing padding, yields the flag.</desc>
+<rect width="1000" height="600" fill="#10182a"/>
+<text x="38" y="43" font-family="system-ui,sans-serif" font-size="23" font-weight="bold" fill="#ecf3ff">crux - the proof tree and the flag decrypt</text>
+<text x="38" y="71" font-family="system-ui,sans-serif" font-size="14" fill="#acc0de">Each factor gets its own certificate, including all five copies of 2.</text>
+<rect x="49" y="106" width="902" height="98" rx="14" fill="#223253" stroke="#7ea9f5"/>
+<text x="71" y="136" font-family="ui-monospace,monospace" font-size="15" fill="#f6faff">root p = 0xd389dfbb379a02ccda7a4ab0b327e8e3</text>
+<text x="153" y="160" font-family="ui-monospace,monospace" font-size="15" fill="#f6faff">655a3c96447c1b5578bee179c930e261</text>
+<text x="71" y="186" font-family="system-ui,sans-serif" font-size="14" fill="#aee9cd">32 little-endian target bytes · witness a = 3 · root has 8 child certificates</text>
+<path d="M500 204 V247 M128 247 H885 M128 247 V268 M338 247 V268 M597 247 V268 M885 247 V268" fill="none" stroke="#7ea9f5" stroke-width="2"/>
+<rect x="45" y="269" width="181" height="81" rx="12" fill="#26334e" stroke="#92c5ac"/>
+<text x="66" y="304" font-family="system-ui,sans-serif" font-size="19" fill="#e5fff0">2 × 5 leaves</text>
+<text x="62" y="331" font-family="ui-monospace,monospace" font-size="13" fill="#c8d5ea">each encoded 00</text>
+<rect x="240" y="269" width="198" height="81" rx="12" fill="#26334e" stroke="#92c5ac"/>
+<text x="263" y="304" font-family="system-ui,sans-serif" font-size="19" fill="#e5fff0">1777</text>
+<text x="263" y="331" font-family="system-ui,sans-serif" font-size="13" fill="#c8d5ea">recursive certificate</text>
+<rect x="453" y="269" width="263" height="81" rx="12" fill="#26334e" stroke="#92c5ac"/>
+<text x="475" y="304" font-family="ui-monospace,monospace" font-size="17" fill="#e5fff0">117013415621</text>
+<text x="475" y="331" font-family="system-ui,sans-serif" font-size="13" fill="#c8d5ea">recursive certificate</text>
+<rect x="732" y="269" width="225" height="81" rx="12" fill="#26334e" stroke="#92c5ac"/>
+<text x="748" y="299" font-family="system-ui,sans-serif" font-size="15" fill="#e5fff0">large prime factor</text>
+<text x="748" y="322" font-family="ui-monospace,monospace" font-size="12" fill="#c8d5ea">1437988544746225798…</text>
+<text x="748" y="340" font-family="system-ui,sans-serif" font-size="11" fill="#c8d5ea">62 digits; full value in the table</text>
+<text x="55" y="387" font-family="system-ui,sans-serif" font-size="16" fill="#eaf1fc">Children multiply (with multiplicities) to p − 1; each child proves its own primality.</text>
+<path d="M109 404 H893" stroke="#6683ad" stroke-dasharray="6 5"/>
+<text x="58" y="439" font-family="ui-monospace,monospace" font-size="15" fill="#f7dc9c">3891 proof bytes → AES-256-CBC + PKCS#7 → 3904 ciphertext bytes → 5208 Base64 characters</text>
+<text x="58" y="471" font-family="system-ui,sans-serif" font-size="14" fill="#aee9cd">Pratt test: a^(p−1) ≡ 1 (mod p); for each distinct q | p−1, a^((p−1)/q) ≠ 1 (mod p).</text>
+<text x="58" y="504" font-family="system-ui,sans-serif" font-size="14" fill="#acc0de">Checker: Base64 decode → first AES-CBC decrypt → remove padding → certificate plaintext</text>
+<text x="58" y="536" font-family="system-ui,sans-serif" font-size="14" fill="#acc0de">Parse and verify the tree against the target prime; SHA-256(plaintext) supplies the second AES key.</text>
+<text x="58" y="568" font-family="system-ui,sans-serif" font-size="14" fill="#aee9cd">64-byte flag ciphertext → AES-256-CBC decrypt (same IV) → remove padding → flag</text>
+</svg>

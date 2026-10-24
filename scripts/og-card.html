@@ -1,0 +1,35 @@
+<!doctype html><html lang="en" data-theme="titanium"><head><meta charset="utf-8">
+<link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/theme-titanium.css">
+<style>
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
+body { display: block; min-height: 0; }
+.og { position: relative; width: 1200px; height: 630px; box-sizing: border-box; padding: 60px 80px 76px;
+  display: flex; flex-direction: column; overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 4% -12%, rgba(var(--accent-rgb), 0.15), transparent 62%),
+    radial-gradient(760px 600px at 108% 18%, rgba(var(--glow-rgb), 0.07), transparent 60%),
+    var(--bg); }
+.og-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); }
+.og-mark { display: flex; align-items: center; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+.og-mark .p { color: var(--accent); margin-right: 2px; }
+.og-mark .caret { display: inline-block; width: 0.5em; height: 0.95em; margin-left: 5px; background: var(--accent); }
+.og-host { font-size: 21px; color: var(--ink-mute); letter-spacing: 0.01em; }
+.og-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.og-split { display: grid; grid-template-columns: minmax(0, 1fr) 430px; gap: 56px; align-items: center; }
+.og-name { margin: 0; font-family: var(--font-mono); font-size: 104px; font-weight: 700; letter-spacing: -0.045em; line-height: 0.98; color: var(--ink); }
+.og-tag { margin: 26px 0 0; font-family: var(--font-mono); font-size: 21px; line-height: 1.6; color: var(--ink-mute); }
+.og-tag .hl { color: var(--accent); }
+.og-tag .sep { color: var(--ink-faint); margin: 0 0.35em; }
+.og-line { margin: 22px 0 0; font-size: 25px; line-height: 1.45; color: var(--ink-soft); }
+.og .dump { margin: 0; transform: none; }
+.og-kicker { display: flex; align-items: center; gap: 14px; margin: 0; font-family: var(--font-mono); font-size: 21px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+.og-kicker::before { content: ""; width: 13px; height: 13px; border-radius: 2px; background: var(--cat); box-shadow: 0 0 16px color-mix(in srgb, var(--cat) 55%, transparent); }
+.og-title { margin: 26px 0 0; max-width: 21ch; font-family: var(--font-mono); font-size: 66px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; color: var(--ink); text-wrap: balance;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.og-meta { margin: 30px 0 0; font-family: var(--font-mono); font-size: 21px; color: var(--ink-mute); }
+.og-meta .sep { color: var(--ink-faint); margin: 0 0.6em; }
+</style></head><body><div class="og">
+<div class="og-top"><div class="og-mark"><span class="p">~/</span>justmazz<span class="caret"></span></div><div class="og-host">jmazzola.github.io</div></div>
+<div class="og-main"><p class="og-kicker" style="--cat: var(--cat-{{CATEGORY_KEY}})">{{CATEGORY_NAME}}</p>
+<h1 class="og-title">{{TITLE}}</h1>
+<p class="og-meta">{{DATE}}<span class="sep">/</span>{{READ_TIME}}<span class="sep">/</span>Justin Mazzola</p></div></div></body></html>

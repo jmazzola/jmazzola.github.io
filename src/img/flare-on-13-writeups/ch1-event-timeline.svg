@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="370" viewBox="0 0 1080 370" role="img" aria-labelledby="title desc">
+<title id="title">FLAreCAPTCHA event timeline</title>
+<desc id="desc">A left mousedown waits one second then fails, and resets one second later. A right mousedown held inside the area reaches its callback after two seconds or later. Releasing or leaving before the callback fails. Elapsed rounded seconds also affect the decoded text.</desc>
+<rect width="1080" height="370" rx="12" fill="#f6f8fc"/>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#17233a">
+<text x="28" y="38" font-size="23" font-weight="700">Which timer wins</text>
+<text x="28" y="66" font-size="15">flarecaptcha.html:336-359, 374-459</text>
+<g stroke="#718096" stroke-width="2"><path d="M250 100H1010"/><path d="M250 92V302M610 92V302M970 92V302" stroke-dasharray="4 6"/></g>
+<g font-size="16"><text x="235" y="88">0 s</text><text x="596" y="88">1 s</text><text x="955" y="88">2 s</text></g>
+<text x="28" y="144" font-size="18">Left: e.button = 0</text><rect x="250" y="117" width="350" height="42" rx="7" fill="#dce8fd"/><text x="355" y="144" font-size="17">Spinner</text><rect x="610" y="117" width="350" height="42" rx="7" fill="#f8dfe1"/><text x="698" y="144" font-size="17">Failure banner</text><text x="970" y="144" font-size="15">Reset</text>
+<text x="28" y="214" font-size="18">Right: e.button = 2</text><rect x="250" y="187" width="710" height="42" rx="7" fill="#dce8fd"/><text x="402" y="214" font-size="17">Keep holding; keep pointer inside</text><circle cx="970" cy="208" r="10" fill="#22875d"/>
+<text x="28" y="270" font-size="18">Early release / exit</text><path d="M250 264H540" stroke="#b6424b" stroke-width="4"/><text x="554" y="271" font-size="17" fill="#9c2638">cancelHold() → triggerFailure()</text>
+<text x="28" y="324" font-size="17">At the right-hold callback: round(elapsed milliseconds / 1000) becomes part of the text-decoding key.</text>
+<text x="28" y="350" font-size="17">A delayed callback can draw a green checkmark and still decode garbage.</text>
+</g></svg>

@@ -378,9 +378,23 @@
   function initCodeBlocks() {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     var ease = getComputedStyle(document.documentElement).getPropertyValue("--ease-out").trim() || "ease-out";
+    try { document.documentElement.classList.toggle("code-wrap-all", localStorage.getItem("codeWrap") === "1"); } catch (e) {}
     document.querySelectorAll(".code-block").forEach(function (block) {
       var head = block.querySelector(".code-head");
-      if (!head || !block.animate) return;
+      if (!head) return;
+      var wrapBtn = head.querySelector(".code-wrap");
+      if (wrapBtn) {
+        wrapBtn.setAttribute("aria-pressed", document.documentElement.classList.contains("code-wrap-all") ? "true" : "false");
+        var toggleWrap = function (e) {
+          e.preventDefault(); e.stopPropagation();
+          var on = document.documentElement.classList.toggle("code-wrap-all");
+          try { localStorage.setItem("codeWrap", on ? "1" : "0"); } catch (err) {}
+          document.querySelectorAll(".code-wrap").forEach(function (b) { b.setAttribute("aria-pressed", on ? "true" : "false"); });
+        };
+        wrapBtn.addEventListener("click", toggleWrap);
+        wrapBtn.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") toggleWrap(e); });
+      }
+      if (!block.animate) return;
       var anim = null;
 
       head.addEventListener("click", function (e) {
@@ -668,6 +682,13 @@
     update();
   }
 
+  /* ---------- spoilers: click a >!…!< to unblur it ---------- */
+  function initSpoilers() {
+    document.querySelectorAll(".spoiler").forEach(function (sp) {
+      sp.addEventListener("click", function () { sp.classList.add("is-revealed"); });
+    });
+  }
+
   initNav();
   initFilter();
   initLost();
@@ -676,4 +697,5 @@
   initCodeBlocks();
   initLightbox();
   initToc();
+  initSpoilers();
 })();

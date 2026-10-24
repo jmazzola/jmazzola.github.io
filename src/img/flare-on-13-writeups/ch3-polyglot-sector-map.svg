@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1210" height="580" viewBox="0 0 1210 580" role="img" aria-labelledby="title desc">
+<title id="title">FlareOn13 document polyglot and raw-sector offset mapping</title>
+<desc id="desc">Document layout and offset conversion: DOS stub begins 0; PDF header at hex 84; PDF object stream at B2; 2352-byte raw sectors begin at zero, each with 16-byte front and 2048-byte payload starting at 16; UDF file click_me begins sector 278 and original offset 9FA30; six-MD5 table at original F9070 in sector 433 maps to click_me fat offset 4DE30 and second slice offset 35E30; ZIP at 1C4E3F and fixed VHD footer at 1C4F8F.</desc>
+<rect width="1210" height="580" rx="12" fill="#f6f9fd"/>
+<g font-family="Segoe UI,Arial,sans-serif" fill="#192c45">
+<text x="27" y="40" font-size="24" font-weight="700">One file, three sets of offsets</text>
+<text x="27" y="66" font-size="15">All hex offsets are measured in the unmodified flareon13.doc unless the row says UDF, fat file, or Mach-O slice.</text>
+<text x="27" y="104" font-size="18" font-weight="700">Original document byte positions</text>
+<rect x="27" y="116" width="160" height="72" rx="6" fill="#d8e6fb"/><rect x="187" y="116" width="605" height="72" rx="6" fill="#e3ead8"/><rect x="792" y="116" width="245" height="72" rx="6" fill="#f8e5db"/><rect x="1037" y="116" width="145" height="72" rx="6" fill="#e8dff5"/>
+<text x="38" y="143" font-size="16">DOS stub 0x00</text><text x="38" y="170" font-size="15">PDF % at 0x84</text><text x="200" y="143" font-size="16">PDF stream starts 0xB2; raw-sector grid started at 0x00</text><text x="200" y="170" font-size="15">click_me first byte at 0x9FA30 • MD5 table at 0xF9070</text><text x="802" y="143" font-size="15">ZIP PK 0x1C4E3F</text><text x="802" y="170" font-size="15">PDF %%EOF 0x1C4E39</text><text x="1046" y="143" font-size="15">VHD footer</text><text x="1046" y="170" font-size="15">0x1C4F8F</text>
+<text x="27" y="229" font-size="18" font-weight="700">Repeat for each of 781 raw CD-ROM sectors (2352 bytes each)</text>
+<rect x="27" y="245" width="110" height="68" fill="#edc8cc"/><rect x="137" y="245" width="900" height="68" fill="#b4d8bd"/><rect x="1037" y="245" width="145" height="68" fill="#eadacf"/>
+<text x="36" y="274" font-size="16">0 - 15</text><text x="147" y="274" font-size="16">16 - 2063: take all 2048 user-data bytes → UDF logical sector</text><text x="1046" y="274" font-size="15">2064 - 2351</text><text x="36" y="298" font-size="14">header</text><text x="1046" y="298" font-size="14">trailer/ECC</text>
+<text x="27" y="354" font-size="18" font-weight="700">Map the encoded MD5 records to code, not by simple subtraction</text>
+<rect x="27" y="369" width="1155" height="146" rx="7" fill="#e5edfc" stroke="#57769f" stroke-width="2"/>
+<text x="46" y="398" font-size="17">doc 0xF9070 = sector 433 × 2352 + 0x640 (inside 2048-byte data window)</text>
+<text x="46" y="429" font-size="17">click_me fat offset = (433 − 278) × 2048 + (0x640 − 16) = 0x4DE30</text>
+<text x="46" y="460" font-size="17">Mach-O slice 1 offset = 0x4DE30 − 0x18000 = 0x35E30</text>
+<text x="46" y="491" font-size="17">IDA VM address = 0x100000000 + 0x35E30 = 0x100035E30; ciphertext: 0x100035EF0</text>
+<text x="27" y="550" font-size="15">Source: flareon13.doc offsets 0x84, 0xB2, 0xF9070, 0xF9130, 0x1C4E39/3F, 0x1C4F8F; UDF 278×2048 extent; Mach-O fat slice1 offset 0x18000.</text>
+</g></svg>

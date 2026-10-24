@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="820" viewBox="0 0 1120 820" role="img" aria-labelledby="title desc">
+  <title id="title">The six catthief HTTP exchanges and the bit header</title>
+  <desc id="desc">Each nonempty server reply requests the next upload. TCP stream four carries catcatcat.jpg. Outgoing bodies are canonical Huffman frames encrypted with a fresh RC4 state. The Huffman payload starts at bit 2091, three bits into byte 261.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0L10 4L0 8Z" fill="#54627a"/></marker></defs>
+  <rect width="1120" height="820" fill="#f5f7fb"/>
+  <g font-family="Segoe UI,Arial,sans-serif" fill="#19263c">
+    <text x="30" y="39" font-size="25" font-weight="700">The reply names the next upload</text>
+    <text x="30" y="67" font-size="15">Six exchanges from capture.pcapng, with the /exfil bodies decoded</text>
+    <text x="190" y="111" font-size="17" font-weight="700">192.168.56.103 · client</text>
+    <text x="775" y="111" font-size="17" font-weight="700">192.168.56.102:8080 · server</text>
+    <path d="M165 128V574M745 128V574" stroke="#aebbd0" stroke-width="2"/>
+    <g font-size="15">
+      <text x="30" y="161">stream 0</text><text x="195" y="149">READY · exfil · 264 B</text>
+      <path d="M178 160H732" stroke="#54627a" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="790" y="155">200 · exfil(1) · 36 B</text><text x="790" y="178">→ important.jpg</text>
+      <text x="30" y="232">stream 1</text><text x="195" y="220">important.jpg · exfil(2) · 3,121,086 B</text>
+      <path d="M178 231H732" stroke="#54627a" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="790" y="226">200 · exfil(3) · 37 B</text><text x="790" y="249">→ anothercat.jpg</text>
+      <text x="30" y="303">stream 2</text><text x="195" y="291">anothercat.jpg · exfil(4) · 2,736,058 B</text>
+      <path d="M178 302H732" stroke="#54627a" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="790" y="297">200 · exfil(5) · 40 B</text><text x="790" y="320">→ yetanothercat.jpg</text>
+      <text x="30" y="374">stream 3</text><text x="195" y="362">yetanothercat.jpg · exfil(6) · 3,061,432 B</text>
+      <path d="M178 373H732" stroke="#54627a" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="790" y="368">200 · exfil(7) · 36 B</text><text x="790" y="391">→ catcatcat.jpg</text>
+    </g>
+    <rect x="20" y="411" width="1080" height="75" rx="8" fill="#e3f0e5" stroke="#73a37c"/>
+    <g font-size="15" font-weight="700">
+      <text x="30" y="445">stream 4</text><text x="195" y="433">catcatcat.jpg · exfil(8) · 3,079,606 B</text>
+      <path d="M178 445H732" stroke="#396b47" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="790" y="439">200 · exfil(9) · 40 B</text><text x="790" y="462">→ myfavoritecat.jpg</text>
+    </g>
+    <g font-size="15">
+      <text x="30" y="520">stream 5</text><text x="195" y="508">myfavoritecat.jpg · exfil(10) · 2,842,789 B</text>
+      <path d="M178 519H732" stroke="#54627a" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="790" y="514">200 · empty response body</text><text x="790" y="537">No sixth JPEG</text>
+    </g>
+    <text x="30" y="590" font-size="17" font-weight="700">Client body = RC4( Huffman header + encoded bits )</text>
+    <text x="30" y="618" font-size="15">Fresh KSA / i=j=0 for each request AND each response; server filenames are RC4-only.</text>
+    <rect x="30" y="641" width="175" height="70" fill="#e2edf9" stroke="#7b9aba"/>
+    <rect x="205" y="641" width="220" height="70" fill="#e9e4f9" stroke="#9380b6"/>
+    <rect x="425" y="641" width="410" height="70" fill="#fff0d6" stroke="#bfa26a"/>
+    <rect x="835" y="641" width="255" height="70" fill="#dff1eb" stroke="#73a592"/>
+    <g font-size="14">
+      <text x="43" y="665">11 bits: alphabet 256</text><text x="43" y="692">bit offsets 0 - 10</text>
+      <text x="219" y="665">32 bits: packed byte count</text><text x="219" y="692">bit offsets 11 - 42</text>
+      <text x="440" y="665">256 × 8 bits: canonical code lengths</text><text x="440" y="692">bit offsets 43 - 2090 · not a byte-aligned header</text>
+      <text x="849" y="665">Payload starts at bit 2091</text><text x="849" y="692">byte 261 + 3 bits · MSB-first</text>
+    </g>
+    <text x="30" y="747" font-size="13">Object sizes: re-analysis/cattraffic/objects; filenames and streams: recover.py:101 - 127.</text>
+    <text x="30" y="770" font-size="13">Header: catthief.exe RVA 0x33B8 - 0x33EE; MSB-first writer RVA 0x53FE; recover.py:17,37 - 89.</text>
+    <text x="30" y="793" font-size="13">The filenames appear after RC4 decryption; the request bodies need Huffman decoding too.</text>
+  </g>
+</svg>

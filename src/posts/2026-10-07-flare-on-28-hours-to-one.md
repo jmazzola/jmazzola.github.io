@@ -3,6 +3,31 @@ title: "a year ago flare-on took 28 hours. this year it took one."
 description: "a game dev finished flare-on 13 in about an hour after last year's winner took almost 28, check out my little test that shows how little you need to start reverse engineering well with models now."
 date: 2026-10-07
 category: thoughts
+changes:
+  - date: 2026-10-23
+    note: "FLARE-On 13 is over, so the challenge names and both screenshots are uncensored now, and the write-ups are linked."
+    before: "Heads up: FLARE-On 13 runs until October 23rd, so the write-ups will be in a new blog post once allowed. Until then, here's what my run needed,"
+    after: "Heads up: FLARE-On 13 is over, and the write-ups for all nine challenges have [their own post](/blog/flare-on-13-writeups/). This one is what my run needed,"
+  - date: 2026-10-23
+    note: "Swapped in the unblurred screenshot, replies and all."
+    before: "Three of my messages from the run, between blurred agent replies:"
+    after: "Three of my messages from the run, each followed by Sol's reply:"
+  - date: 2026-10-23
+    note: "The challenge names are in now."
+    before: "Challenge names and anything about what's in them stay out until the contest closes."
+    after: "Now that the contest's over, the challenge names are in, and the [write-ups](/blog/flare-on-13-writeups/) cover what's inside each one."
+  - date: 2026-10-23
+    note: "Swapped in an unblurred re-capture of the refusals."
+    before: "errors (code=cyber_policy) between the subagent's blurred analysis steps"
+    after: 'errors (code=cyber_policy), each right after the subagent''s thinking: "Checking rendered artifact reference", then "Analyzing VM bytecode" and "Inspecting CB7A bytes", then "Locating transcript records" and "Inspecting CB7A and main region", with omp''s own "Continue." nudge in between'
+  - date: 2026-10-23
+    note: "Said what CB7A actually is now that the picture isn't blurred."
+    before: "All three, straight from the subagent's view in omp. Blurred some stuff so it doesn't give away the challenge."
+    after: "All three, straight from the subagent's session in omp, unblurred now. CB7A is one of the encrypted code records it was trying to read out of the calculator's certificate."
+  - date: 2026-10-23
+    note: "The write-ups are up."
+    before: "The write-ups go up on October 23, and I'll post on X when they do."
+    after: "The write-ups are up now: [all nine challenges, one by one](/blog/flare-on-13-writeups/)."
 ---
 
 Last year's FLARE-On winner, [@_riatre](https://x.com/_riatre), an experienced reverse engineer using AI, finished in [1 day, 3 hours and 47 minutes](https://flare-on.com/2025.html). This year [@flafydev](https://x.com/flafydev), a game dev who had only done the contest [once before](https://flare-on.com/2025.html#:~:text=Jordan%2C%20jackxorjack%2C%20Jan1s%2C-,Flafy,-%2C%20rattle%2C%20darbonzo%2C%20krkn), finished in about [**an hour**](https://flare-on13.ctfd.io/users/320).
@@ -23,7 +48,7 @@ What's even crazier is that people in the replies pointed out that last year's w
 
 As mentioned, I couldn't do my own run until I got back, but I figured I'd do the very bare minimum: a single prompt, and the chance that whatever tools it needed were already on my machine. It took [**about four and a half hours**](https://flare-on13.ctfd.io/users/2314). That's how much better the models got in one year, and I honestly don't think it's ever been this easy to get into reverse engineering.
 
-Heads up: FLARE-On 13 runs until October 23rd, so the write-ups will be in a new blog post once allowed. Until then, here's what my run needed, the prompt that started it, and the numbers for every challenge next to Truix's, [who beat me by almost two hours](https://flare-on13.ctfd.io/users/1174) (damn Opus CVP, way too stronk).
+Heads up: FLARE-On 13 is over, and the write-ups for all nine challenges have [their own post](/blog/flare-on-13-writeups/). This one is what my run needed, the prompt that started it, and the numbers for every challenge next to Truix's, [who beat me by almost two hours](https://flare-on13.ctfd.io/users/1174) (damn Opus CVP, way too stronk).
 
 ## Two years of the same challenge
 
@@ -80,7 +105,7 @@ For most of my career, finishing FLARE-On meant a ton of prep, script-based or o
 
 My run used very little of that directly, and where it did matter was noticing when an answer was **wrong**. Most of it went to watching agents work, pointing one at something it missed now and then (like where my IDA install was), and pulling them out of rabbit holes.
 
-![Three of my messages from the run, between blurred agent replies: "holy heck we STILL havent solved this>?", "Come on GPT, I know you an do it; don't fall down rabbit holes anymore", and "I promise you that flag is a hint to get the actual flag, stop going down a rabbit hole AGAIN"](/img/flare-on-13/steering-rabbit-holes.png)
+![Three of my messages from the run, each followed by Sol's reply: "holy heck we STILL havent solved this>?" at 12:59 AM, answered with "Not yet. The hidden code waits for an ICMP trigger, then connects to an address carried inside that packet"; "Come on GPT, I know you an do it; don't fall down rabbit holes anymore" at 1:17 AM, answered with "Seven flags are now accepted"; and "I promise you that flag is a hint to get the actual flag, stop going down a rabbit hole AGAIN" at 3:23 AM, answered with "You're right. The wrong-domain string is an instruction, not an almost-correct answer."](/img/flare-on-13/steering-rabbit-holes.png)
 
 <small>Professional reverse engineering, 2026.</small>
 
@@ -149,7 +174,7 @@ Cost on both sides is whatever the harness logged per call, which isn't necessar
 
 ## Per-challenge numbers
 
-Challenge names and anything about what's in them stay out until the contest closes. Truix ran his on Saturday, September 26th, and I ran mine on the night of October 6th, so the clock times won't line up between the tables, and none of them compare to hall-of-fame times, which count from launch. "Finished at" is when CTFd accepted the flag, in Eastern time. My "time on it" runs from the previous accepted flag (or from when I started, for challenge 1). Truix timed his from each download, and his challenge 1 clock starts at his first prompt.
+Now that the contest's over, the challenge names are in, and the [write-ups](/blog/flare-on-13-writeups/) cover what's inside each one. Truix ran his on Saturday, September 26th, and I ran mine on the night of October 6th, so the clock times won't line up between the tables, and none of them compare to hall-of-fame times, which count from launch. "Finished at" is when CTFd accepted the flag, in Eastern time. My "time on it" runs from the previous accepted flag (or from when I started, for challenge 1). Truix timed his from each download, and his challenge 1 clock starts at his first prompt.
 
 My run, almost all on Sol 6:
 
@@ -201,9 +226,9 @@ Daybreak cut down the amount of cyber refusals but didn't remove them outright, 
 
 I hit **3**, all on challenge 7, all on Astra, and all in the same blunt second-opinion subagent. Each one came back as an API error saying the content was "flagged for possible cybersecurity risk," and after the third I had that subagent killed and relaunched. When you see what Challenge 7 entails it'll make a lot of sense.
 
-![The infamous cyber refusals during challenge 7: three "This content was flagged for possible cybersecurity risk" errors (code=cyber_policy) between the subagent's blurred analysis steps](/img/flare-on-13/astra-refusals.png)
+![The infamous cyber refusals during challenge 7: three "This content was flagged for possible cybersecurity risk" errors (code=cyber_policy), each right after the subagent's thinking: "Checking rendered artifact reference", then "Analyzing VM bytecode" and "Inspecting CB7A bytes", then "Locating transcript records" and "Inspecting CB7A and main region", with omp's own "Continue." nudge in between](/img/flare-on-13/astra-refusals.png)
 
-<small>All three, straight from the subagent's view in omp. Blurred some stuff so it doesn't give away the challenge.</small>
+<small>All three, straight from the subagent's session in omp, unblurred now. CB7A is one of the encrypted code records it was trying to read out of the calculator's certificate.</small>
 
 Sol never got one, which makes sense: Daybreak Blue only lowers refusals on Sol, while Astra keeps standard safeguards unless you're on Daybreak Red. Seems like Hex-Rays ran into the same thing - their MCP announcement recommends Opus 5.5 but warns that "cybersecurity safeguards frequently interrupt work," often enough that they suggest falling back to Opus 4.6 (what a sad day for cybersecurity that will be once that model gets sunset).
 
@@ -247,6 +272,6 @@ If you've been putting off learning reverse engineering because it looked like y
 
 If you defend something, assume whoever is looking at it has the same models I did and can get through it in **hours**.
 
-The write-ups go up on October 23, and I'll post on X when they do.
+The write-ups are up now: [all nine challenges, one by one](/blog/flare-on-13-writeups/).
 
 If you ran FLARE-On 13 with models and kept your numbers, send them over. I'd like to put a few more runs next to ours and expand this post over time until the event is over.

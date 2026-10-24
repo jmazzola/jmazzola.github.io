@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="900" viewBox="0 0 1120 900" role="img" aria-labelledby="title desc">
+  <title id="title">Reconstruction of Threat Invaders frames 651, 672, 800, and 821</title>
+  <desc id="desc">Frame 468 recovers the machine GUID and initial LCG state. An eighteen-byte server comment, a five-hundred-thirty-byte client response, a twenty-eight-byte comment, and a forty-six-byte response consume one continuous keystream at offsets zero, eighteen, five hundred forty-eight, and five hundred seventy-six.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0L10 4L0 8Z" fill="#53617a"/></marker></defs>
+  <rect width="1120" height="900" fill="#f5f7fb"/>
+  <g font-family="Segoe UI,Arial,sans-serif" fill="#18253b">
+    <text x="30" y="40" font-size="25" font-weight="700">One state across both directions</text>
+    <text x="30" y="68" font-size="15">Commands and stdout take turns consuming the same stream; padding consumes nothing.</text>
+    <rect x="30" y="92" width="1060" height="145" rx="10" fill="white" stroke="#aebbd0"/>
+    <text x="50" y="121" font-size="18" font-weight="700">Frame 468 · bootstrap record · feedback_length = 0x2010</text>
+    <text x="50" y="153" font-size="15">16 active bytes in a 4096-byte buffer: 54ae032ea875b0f8cc578a511fe71631</text>
+    <text x="50" y="182" font-size="15">XOR reversed session GUID's bytes_le → machine bytes 614d587848636e4980454964586c756c</text>
+    <text x="50" y="212" font-size="15">Native seed mixing → initial LCG state 0xc4bfc80d59d86b9b · stream offset 0</text>
+    <path d="M90 238V279" stroke="#53617a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="30" y="290" width="1060" height="112" rx="10" fill="#e9e4f9" stroke="#9380b6"/>
+    <text x="50" y="319" font-size="18" font-weight="700">651 · server → client · BANANA comment · 18 bytes</text>
+    <text x="50" y="349" font-size="16">Decoded command: cmd:cmd.exe;/c dir</text>
+    <text x="50" y="379" font-size="15">Consume stream [0, 18) · next state 0xadc977b0537d0dd5</text>
+    <path d="M90 403V440" stroke="#53617a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="114" y="429" font-size="14" font-weight="700">carry state; do not reseed</text>
+    <rect x="30" y="450" width="1060" height="112" rx="10" fill="#e2edf9" stroke="#7b9aba"/>
+    <text x="50" y="479" font-size="18" font-weight="700">672 · client → server · feedback_length = 0x4212</text>
+    <text x="50" y="509" font-size="16">530 active bytes / 4096-byte buffer → directory stdout includes flag.txt (46 bytes)</text>
+    <text x="50" y="539" font-size="15">Consume stream [18, 548) · next state 0xe0a7ed13c894471f</text>
+    <path d="M90 563V600" stroke="#53617a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="114" y="589" font-size="14" font-weight="700">carry state; do not consume zero padding</text>
+    <rect x="30" y="610" width="1060" height="112" rx="10" fill="#e9e4f9" stroke="#9380b6"/>
+    <text x="50" y="639" font-size="18" font-weight="700">800 · server → client · BENIGN comment · 28 bytes</text>
+    <text x="50" y="669" font-size="16">Decoded command: cmd:cmd.exe;/c type flag.txt</text>
+    <text x="50" y="699" font-size="15">Consume stream [548, 576) · next state 0xaa2878b62761d1db</text>
+    <path d="M90 723V760" stroke="#53617a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="114" y="749" font-size="14" font-weight="700">carry state again</text>
+    <rect x="30" y="770" width="1060" height="80" rx="10" fill="#dff1eb" stroke="#73a592"/>
+    <text x="50" y="799" font-size="18" font-weight="700">821 · client → server · feedback_length = 0x402E · 46 active bytes / 4096</text>
+    <text x="50" y="829" font-size="15">Consume stream [576, 622) → file stdout · final state 0x6e17af91d88b5e71</text>
+    <text x="30" y="876" font-size="12">Frames 468, 651, 672, 800, 821 · recover_flag.py:52 - 66, 83 - 117 · host RVA 0xC65E0 - 0xC66E3</text>
+  </g>
+</svg>

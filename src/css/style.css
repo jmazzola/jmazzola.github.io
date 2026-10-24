@@ -1344,6 +1344,11 @@ html.lightbox-open { overflow: hidden; }
   transition: transform var(--dur) var(--ease-out);
 }
 .prose .code-block[open]:not(.is-closing) .code-toggle::after { margin-top: 0.25em; transform: rotate(-135deg); }
+.prose .code-head-actions { display: inline-flex; align-items: center; gap: 1.1rem; }
+.prose .code-wrap { text-transform: none; color: var(--ink-faint); cursor: pointer; transition: color var(--dur) var(--ease-out); }
+.prose .code-wrap:hover, .prose .code-wrap:focus-visible { color: var(--ink); outline: none; }
+.code-wrap-all .prose .code-wrap { color: var(--accent); }
+.code-wrap-all .prose .code-block pre, .code-wrap-all .prose .code-block pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 .prose .code-block pre {
   margin: 0;
   padding: 0.375rem 1.25rem 1.25rem;
@@ -1389,6 +1394,31 @@ html.lightbox-open { overflow: hidden; }
 .token.inserted { color: #a5d6a7; }
 .token.bold { font-weight: 600; }
 .token.italic { font-style: italic; }
+
+/* the run stat line under each challenge heading (time/tokens/cost, me vs Truix) */
+.prose p:has(> .writeup-stat) { margin-top: 0.4em; margin-bottom: 0.9em; }
+.prose .writeup-stat { color: var(--ink-mute); }
+
+/* flag/spoiler reveal: >!text!< becomes a <button class="spoiler"> whose contents
+   blur until clicked, then animate clear. JS-gated, so no-JS readers see it plainly. */
+.spoiler { margin: 0; padding: 0; border: 0; background: none; font: inherit; line-height: inherit; color: inherit; vertical-align: baseline; cursor: pointer; }
+.js .spoiler > code { transition: filter 520ms var(--ease-out); }
+.js .spoiler:not(.is-revealed) > code { filter: blur(7px); user-select: none; }
+.js .spoiler.is-revealed > code { filter: blur(0); }
+.js .spoiler:not(.is-revealed)::after {
+  content: "click to reveal";
+  margin-left: 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color var(--dur) var(--ease-out);
+}
+.js .spoiler:hover:not(.is-revealed)::after,
+.js .spoiler:focus-visible:not(.is-revealed)::after { color: var(--accent); }
+.js .spoiler:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) { .js .spoiler > code { transition: none; } }
 
 /* ---------- post ---------- */
 .post-header {
@@ -1524,6 +1554,9 @@ html.lightbox-open { overflow: hidden; }
 .post-changes .change-msg + .change-diff { margin-top: 0.85rem; }
 /* the hunk header names the section the change is in and links to it */
 .post-changes .diff-hunk { display: block; width: fit-content; margin-bottom: 0.2rem; color: var(--ink-mute); }
+/* several passages changed the same day: one diff, hunks split by a rule like a file diff */
+.post-changes .diff-chunk + .diff-chunk { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--line); }
+.post-changes .diff-note { margin: 0 0 0.2rem; color: var(--ink-faint); font-style: italic; }
 .diff-line { display: grid; grid-template-columns: 2ch minmax(0, 1fr); }
 .diff-sign { user-select: none; }
 .diff-mod .diff-sign { color: var(--ink-faint); }

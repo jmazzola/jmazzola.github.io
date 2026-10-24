@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" role="img" aria-labelledby="title desc">
+<title id="title">NeonOutRun native V8 sort, min and replaceAll flow</title>
+<desc id="desc">Sort accumulates 28 weighted values. Each min call pops a value and applies an ordinal-specific sine coefficient. The replaceAll guard requires both sums to have magnitude above one millionth and their difference below one millionth, then copies the collected prefix and changes domain character 1 to l.</desc>
+<rect width="1100" height="640" fill="#0b1222"/>
+<text x="30" y="44" font-family="system-ui,sans-serif" font-size="24" font-weight="bold" fill="#f2f7ff">NeonOutRun - native V8 hooks</text>
+<text x="30" y="69" font-family="system-ui,sans-serif" font-size="14" fill="#a5bbda">Three JavaScript calls share a deque, two sums, and a byte vector.</text>
+<rect x="30" y="95" width="316" height="133" rx="11" fill="#20304f" stroke="#80aafa"/>
+<text x="50" y="124" font-family="system-ui,sans-serif" font-size="18" fill="#ecf3ff">1 · Array.prototype.sort</text>
+<text x="50" y="149" font-family="ui-monospace,monospace" font-size="13" fill="#b5cff5">ELF RVA 0x67DEB2</text>
+<text x="50" y="175" font-family="system-ui,sans-serif" font-size="14" fill="#f6e7b0">28 sorted values → native deque</text>
+<text x="50" y="202" font-family="system-ui,sans-serif" font-size="13" fill="#bcd0eb">recorded sum: −13,984,670,000</text>
+<rect x="392" y="95" width="330" height="133" rx="11" fill="#20304f" stroke="#80aafa"/>
+<text x="411" y="124" font-family="system-ui,sans-serif" font-size="18" fill="#ecf3ff">2 · Math.min (28 calls)</text>
+<text x="411" y="149" font-family="ui-monospace,monospace" font-size="13" fill="#b5cff5">ELF RVA 0x67EB83</text>
+<text x="411" y="175" font-family="system-ui,sans-serif" font-size="14" fill="#f6e7b0">integer 0…255 second argument</text>
+<text x="411" y="202" font-family="system-ui,sans-serif" font-size="13" fill="#bcd0eb">pop → signed helper → sine weight</text>
+<rect x="762" y="95" width="308" height="133" rx="11" fill="#20304f" stroke="#80aafa"/>
+<text x="781" y="124" font-family="system-ui,sans-serif" font-size="18" fill="#ecf3ff">3 · String.replaceAll</text>
+<text x="781" y="149" font-family="ui-monospace,monospace" font-size="13" fill="#b5cff5">ELF RVA 0x67E81E</text>
+<text x="781" y="175" font-family="system-ui,sans-serif" font-size="14" fill="#f6e7b0">guard: |sort| and |min| &gt; 10⁻⁶</text>
+<text x="781" y="202" font-family="system-ui,sans-serif" font-size="13" fill="#bcd0eb">|sort − min| &lt; 10⁻⁶</text>
+<path d="M346 163 H392 M722 163 H762" fill="none" stroke="#c5d9fa" stroke-width="3"/>
+<rect x="94" y="271" width="924" height="169" rx="12" fill="#182a43" stroke="#6fc9b6"/>
+<text x="116" y="300" font-family="system-ui,sans-serif" font-size="19" fill="#a6f1d4">Ordinal 0: choosing the byte that makes the coefficient +1</text>
+<text x="116" y="328" font-family="ui-monospace,monospace" font-size="15" fill="#e1ecfc">reducer input 255 → helper RAX 0x000000000a07170c = 168236812 (signed)</text>
+<text x="116" y="357" font-family="ui-monospace,monospace" font-size="15" fill="#e1ecfc">direction d=1; choose b=(h−90) mod 360 = 82 = 'R'</text>
+<text x="116" y="387" font-family="ui-monospace,monospace" font-size="15" fill="#f8dca0">sin(π × (h − b) / 180) = +1; repeat equation for all 28 ordinals</text>
+<text x="116" y="418" font-family="system-ui,sans-serif" font-size="13" fill="#bcd0eb">Probe b=65 ('A') instead yielded coefficient ≈0.9563047559720574 at ordinal 0.</text>
+<path d="M556 228 V271 M556 440 V462" stroke="#c5d9fa" stroke-width="3"/>
+<rect x="94" y="462" width="924" height="116" rx="12" fill="#273044" stroke="#f7ba7d"/>
+<text x="116" y="493" font-family="system-ui,sans-serif" font-size="18" fill="#f3f7ff">Both sums: −13,984,670,000; difference: 0</text>
+<text x="116" y="523" font-family="ui-monospace,monospace" font-size="14" fill="#f8dca0">ELF RVA 0x67EA68: add byte [rcx+0x1E], 0x3B → '1' (0x31) becomes 'l' (0x6C)</text>
+<text x="116" y="551" font-family="system-ui,sans-serif" font-size="13" fill="#bcd0eb">The callback also copies the collected min-argument bytes over the result's prefix.</text>
+<text x="30" y="612" font-family="system-ui,sans-serif" font-size="13" fill="#a5bbda">The probe calls the original native hooks with substituted JavaScript in process memory.</text>
+</svg>
