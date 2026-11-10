@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>justmazz</title>
+  <link href="https://jmazzola.github.io/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://justmazz.com/" rel="alternate" type="text/html"/>
+  <id>https://jmazzola.github.io/</id>
+  <updated>2026-11-10T05:46:44Z</updated>
+  <author><name>Justin Mazzola</name><uri>https://justmazz.com/</uri></author>
+  <entry>
+    <title>This blog moved to justmazz.com</title>
+    <link href="https://justmazz.com/" rel="alternate" type="text/html"/>
+    <id>https://jmazzola.github.io/moved-to-justmazz-com</id>
+    <published>2026-11-10T05:46:44Z</published>
+    <updated>2026-11-10T05:46:44Z</updated>
+    <content type="html">&lt;p&gt;This blog now lives at &lt;a href=&quot;https://justmazz.com/&quot;&gt;justmazz.com&lt;/a&gt;. This feed won&amp;#39;t get new posts; subscribe to &lt;a href=&quot;https://justmazz.com/feed.xml&quot;&gt;https://justmazz.com/feed.xml&lt;/a&gt; instead.&lt;/p&gt;</content>
+  </entry>
+</feed>
